@@ -2,6 +2,7 @@
 
 class Tables_Values:
     def __init__(self) -> None:
+        self.file = " "
         self.capture = " "
         self.code = []
         self.row = 0

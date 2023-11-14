@@ -19,7 +19,7 @@ class Parser_Function():
             "number":{
                 "^-?[0-9]+(\.[0-9]+)? ?": subunits.Data_Type(self.tab).numbar,
                 "^-?[0-9]+ ?": subunits.Data_Type(self.tab).numbr,
-                "^\".*\" ?": subunits.Data_Type(self.tab).yarn,
+                
             },
 
             "expression":{
@@ -113,8 +113,11 @@ class Parser_Function():
     def error_handler (self):
         print("\nSYNTAX ERROR !!")
         print(f"There is an error in line {self.tab.row+1}:{self.tab.column}")
-        print("Type error: ")
-        print(f"{self.tab.row+1}. | {self.tab.code[self.tab.row]}")
-        print("     "+" "*self.tab.column+"^")
+
+        print("\nFile")
+        print(f".\{self.tab.file} {self.tab.row+1}:{self.tab.column}")
+        print(f"\t{self.tab.row+1}. | {self.tab.code[self.tab.row].strip()}")
+        print("\t     "+" "*self.tab.column+"^")
+        print()
 
         exit()

@@ -7,12 +7,11 @@ from subunits import *
 tab = Tables_Values()
 pars = Parser_Function(tab)
 
-f = open('testcases\sample1.lol',  'r')
+file = 'testcases\sample1.lol'
+f = open( file,  'r')
 
+tab.file = file
 tab.code = f.readlines()
-
-# print(tab.code)
-
 
 for i , line in enumerate(tab.code):
     tab.row = i

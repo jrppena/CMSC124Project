@@ -8,11 +8,11 @@ class Data_Type ():
 
     def numbr(self):
         
-        return int (re.search("^-?[0-9]+", self.tab.capture).group())
+        return int (self.tab.capture.strip())
     
     def numbar(self):
         
-        return float (re.search("^-?[0-9]+(\.[0-9]+)?", self.tab.capture).group())
+        return float (self.tab.capture.strip())
     
     def yarn(self):
 

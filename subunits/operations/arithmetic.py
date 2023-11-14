@@ -10,9 +10,9 @@ class Arithmetic():
     def main(self):
         # Use main function for the context-free grammar
         # <number> | <expression> AN <number> | <expression>
-        self.val1 = self.pars.get_lexemes(["expression", "number"])
+        self.val1 = self.pars.get_lexemes(["number", "expression"])
         self.pars.get_rid("^AN ")
-        self.val2 = self.pars.get_lexemes(["expression", "number"])
+        self.val2 = self.pars.get_lexemes(["number", "expression"])
         
 
     def add(self):
@@ -36,7 +36,7 @@ class Arithmetic():
     def div(self):
         self.main()
         print(self.val1 , "/", self.val2)
-        return self.val1 / self.val2
+        return int (self.val1 / self.val2)
     
     def mod (self):
         self.main()
