@@ -13,14 +13,23 @@ f = open( file,  'r')
 tab.file = file
 tab.code = f.readlines()
 
-for i , line in enumerate(tab.code):
-    tab.row = i
-    tab.line = line
+tab.row = 0
+tab.line = tab.code[tab.row]
 
-    print(pars.get_lexemes(["expression"]))
-    print()
+# you can call you newly created lexemes here
+print(pars.get_lexemes(["expression"]))
+print()
 
-    tab.column = 0
+
+
+# for i , line in enumerate(tab.code):
+#     tab.row = i
+#     tab.line = line
+
+#     print(pars.get_lexemes(["expression"]))
+#     print()
+
+#     tab.column = 0
 
 
     

@@ -11,3 +11,7 @@ class Tables_Values:
         self.variables = []
         self.function_names = []
         self.stack = []
+
+    def new_line(self):
+        self.row+=1
+        self.line = self.code[self.row]
