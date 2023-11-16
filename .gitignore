@@ -1,5 +1,3 @@
-.\testcases\*.lol
-.\main.py
 testcases/sample1.lol
 testcases/sample2.lol
-testcases/sample1.lol
+main.py
