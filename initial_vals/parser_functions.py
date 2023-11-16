@@ -1,5 +1,6 @@
-import subunits 
+import subunits as s
 import re
+
 class Parser_Function():
 
     def __init__(self, tab) -> None:
@@ -17,19 +18,19 @@ class Parser_Function():
         """
         self.cfg = {
             "number":{
-                "^-?[0-9]+(\.[0-9]+)? ?": subunits.Data_Type(self.tab).numbar,
-                "^-?[0-9]+ ?": subunits.Data_Type(self.tab).numbr,
+                "^-?[0-9]+(\.[0-9]+)? ?": s.Data_Type(self.tab).numbar,
+                "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
                 
             },
 
             "expression":{
-                '^SUM OF ' : subunits.Arithmetic(self.tab, self).add, 
-                '^DIFF OF ': subunits.Arithmetic(self.tab, self).minus,
-                '^PRODUKT OF ': subunits.Arithmetic(self.tab, self).mul, 
-                '^QUOSHUNT OF ': subunits.Arithmetic(self.tab, self).div , 
-                '^MOD OF ': subunits.Arithmetic(self.tab, self).mod,
-                '^BIGGR OF ': subunits.Arithmetic(self.tab, self).biggr,
-                '^SMALLR OF ': subunits.Arithmetic(self.tab, self).smallr,
+                '^SUM OF ' : s.Arithmetic(self.tab, self).add, 
+                '^DIFF OF ': s.Arithmetic(self.tab, self).minus,
+                '^PRODUKT OF ': s.Arithmetic(self.tab, self).mul, 
+                '^QUOSHUNT OF ': s.Arithmetic(self.tab, self).div , 
+                '^MOD OF ': s.Arithmetic(self.tab, self).mod,
+                '^BIGGR OF ': s.Arithmetic(self.tab, self).biggr,
+                '^SMALLR OF ': s.Arithmetic(self.tab, self).smallr,
             }
         }
 
@@ -110,8 +111,17 @@ class Parser_Function():
         return res
     
     def get_rid_new_line(self):
+        """Get rid new line
         
-        if self.__get_data("^ *BTW ") or self.__get_data("^ *\n"):
+        This is a strict new line checker. It will also detect if there is a comment
+        if there is a comment or \n, automatically go to next line.
+        else error
+
+        Return: (bool) : True if new line is executed
+        
+        """
+        if self.__get_data("^ *BTW") or self.__get_data("^ *\n"):
+            print(self.tab.capture)
             self.tab.new_line()
             return True
         
