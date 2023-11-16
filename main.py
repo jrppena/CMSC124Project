@@ -16,20 +16,25 @@ tab.code = f.readlines()
 tab.row = 0
 tab.line = tab.code[tab.row]
 
-# you can call you newly created lexemes here
+"""
+Instructions in getting the classes up and running
+
+1. Build your class in .\subunits folder
+2. make sure that import your class in .\subunits\__init__.py
+3. add the abtractions and regex in .\init_vals\parser_function.py 
+    in self.cfg variable
+4. to test if it is working you can execute it below this file
+
+"""
+
+# You can call you newly created lexemes here !!!
+print(pars.get_lexemes(["expression"]))
+print(pars.get_rid_new_line())
+print()
 print(pars.get_lexemes(["expression"]))
 print()
 
 
-
-# for i , line in enumerate(tab.code):
-#     tab.row = i
-#     tab.line = line
-
-#     print(pars.get_lexemes(["expression"]))
-#     print()
-
-#     tab.column = 0
 
 
     
