@@ -64,7 +64,6 @@ class Parser_Function():
         else:
             self.error_handler()
                 
-
     def __get_data(self, reg):
         """Get data
         search if there is a match. If there is a match: 
@@ -110,6 +109,15 @@ class Parser_Function():
 
         return res
     
+    def get_rid_new_line(self):
+        
+        if self.__get_data("^ *BTW ") or self.__get_data("^ *\n"):
+            self.tab.new_line()
+            return True
+        
+        self.error_handler()
+
+
     def error_handler (self):
         print("\nSYNTAX ERROR !!")
         print(f"There is an error in line {self.tab.row+1}:{self.tab.column}")
@@ -117,7 +125,7 @@ class Parser_Function():
         print("\nFile")
         print(f".\{self.tab.file} {self.tab.row+1}:{self.tab.column}")
         print(f"\t{self.tab.row+1}. | {self.tab.code[self.tab.row].strip()}")
-        print("\t     "+" "*self.tab.column+"^")
+        print("\t"+" "*len(str(self.tab.row+1))+" "*(self.tab.column+4)+"^")
         print()
 
         exit()
