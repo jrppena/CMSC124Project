@@ -82,6 +82,7 @@ class Parser_Function():
         res = re.search(reg, self.tab.line)
     
         if res:
+            print(self.tab.line) # comment if you dont like it
             self.tab.column += res.span()[1]
             self.tab.capture = res.group()
             self.tab.line = self.tab.line[res.span()[1]:]
@@ -121,7 +122,6 @@ class Parser_Function():
         
         """
         if self.__get_data("^ *BTW") or self.__get_data("^ *\n"):
-            print(self.tab.capture)
             self.tab.new_line()
             return True
         
