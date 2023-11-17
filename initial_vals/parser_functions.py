@@ -31,6 +31,9 @@ class Parser_Function():
                 '^MOD OF ': s.Arithmetic(self.tab, self).mod,
                 '^BIGGR OF ': s.Arithmetic(self.tab, self).biggr,
                 '^SMALLR OF ': s.Arithmetic(self.tab, self).smallr,
+            },
+            "input":{
+                "^GIMMEH ": s.Input(self.tab, self).main
             }
         }
 
@@ -60,7 +63,6 @@ class Parser_Function():
         for abtraction in cfg:
             for reg in self.cfg[abtraction]:
                 if res:= self.__get_data(reg):
-                    self.tab.capture_group = res.groups()
 
                     return self.cfg[abtraction][reg]()
         else:
@@ -84,6 +86,7 @@ class Parser_Function():
     
         if res:
             # print(self.tab.line) # comment if you dont like it
+            self.tab.capture_group = res.groups()
             self.tab.column += res.span()[1]
             self.tab.capture = res.group()
             self.tab.line = self.tab.line[res.span()[1]:]
