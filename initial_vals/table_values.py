@@ -4,11 +4,17 @@ class Tables_Values:
     def __init__(self) -> None:
 
         self.capture = " "
-        """
+        """Data type (str)
         This is where the lexemes are stored. 
         Note that it overwrites itself everytime it 
         encounters a lexeme
         """
+
+        self.capture_group = " " 
+        """Tuple[str]
+        Tuple of captured in the regex
+        """
+
         self.code = []
         """
         List if the code

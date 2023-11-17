@@ -20,7 +20,7 @@ class Parser_Function():
             "number":{
                 "^-?[0-9]+(\.[0-9]+)? ?": s.Data_Type(self.tab).numbar,
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
-                "^\"-?[0-9]+(\.[0-9]+)?\" ?" : s.Typecasting(self.tab, self).str_to_num,
+                "^\"(-?[0-9]+(\.[0-9]+)?)\" ?" : s.Typecasting(self.tab, self).str_to_num,
             },
 
             "expression":{
@@ -59,8 +59,9 @@ class Parser_Function():
 
         for abtraction in cfg:
             for reg in self.cfg[abtraction]:
+                if res:= self.__get_data(reg):
+                    self.tab.capture_group = res.groups()
 
-                if self.__get_data(reg):
                     return self.cfg[abtraction][reg]()
         else:
             self.error_handler()
