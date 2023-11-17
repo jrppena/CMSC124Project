@@ -18,7 +18,7 @@ class Parser_Function():
         """
         self.cfg = {
             "number":{
-                "^-?[0-9]+(\.[0-9]+)? ?": s.Data_Type(self.tab).numbar,
+                "^-?[0-9]+(\.[0-9]+) ?": s.Data_Type(self.tab).numbar,
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
                 "^\"(-?[0-9]+(\.[0-9]+)?)\" ?" : s.Typecasting(self.tab, self).str_to_num,
             },
@@ -34,6 +34,16 @@ class Parser_Function():
             },
             "input":{
                 "^GIMMEH ": s.Input(self.tab, self).main
+            },
+            "literal":{
+                "^-?[0-9]+(\.[0-9]+)? ?": s.Data_Type(self.tab).numbar,
+                "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
+                "^\"(.*)\" ?": s.Data_Type(self.tab).yarn,
+                "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
+                "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
+            },
+            "variable":{
+                "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_var,
             }
         }
 
@@ -90,10 +100,11 @@ class Parser_Function():
             self.tab.column += res.span()[1]
             self.tab.capture = res.group()
             self.tab.line = self.tab.line[res.span()[1]:]
+            print(self.tab.line)
 
         return res                
     
-    def get_rid (self, reg):
+    def get_rid (self, reg, error = True):
         """Get rid
         For context-free grammar with a certain keyword such as 'AN'
         or 'ITZ', 'get_rid' get rid of this keywords. If the keyword is 
@@ -110,7 +121,7 @@ class Parser_Function():
         """
         res = self.__get_data(reg)
     
-        if not res:
+        if not res and error:
             self.error_handler()
 
         return res
@@ -138,7 +149,7 @@ class Parser_Function():
 
         print("\nFile")
         print(f".\{self.tab.file} {self.tab.row+1}:{self.tab.column}")
-        print(f"\t{self.tab.row+1}. | {self.tab.code[self.tab.row].strip()}")
+        print(f"\t{self.tab.row+1}. | {self.tab.code[self.tab.row]}")
         print("\t"+" "*len(str(self.tab.row+1))+" "*(self.tab.column+4)+"^")
         print()
 

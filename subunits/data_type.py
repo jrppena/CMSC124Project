@@ -14,7 +14,7 @@ class Data_Type ():
     
     def yarn(self):
 
-        pass
+        return self.tab.capture_group[0]
 
     def troof(self): 
         pass

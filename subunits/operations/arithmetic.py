@@ -11,7 +11,6 @@ class Arithmetic():
         # Use main function for the context-free grammar
         # <number> | <expression> AN <number> | <expression>
         self.val1 = self.pars.get_lexemes(["number", "expression"])
-        print(self.val1)
         self.pars.get_rid("^AN ")
         self.val2 = self.pars.get_lexemes(["number", "expression"])
         
