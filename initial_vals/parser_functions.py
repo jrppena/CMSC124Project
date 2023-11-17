@@ -20,7 +20,7 @@ class Parser_Function():
             "number":{
                 "^-?[0-9]+(\.[0-9]+)? ?": s.Data_Type(self.tab).numbar,
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
-                
+                "^\"-?[0-9]+(\.[0-9]+)?\" ?" : s.Typecasting(self.tab, self).str_to_num,
             },
 
             "expression":{
@@ -82,7 +82,7 @@ class Parser_Function():
         res = re.search(reg, self.tab.line)
     
         if res:
-            print(self.tab.line) # comment if you dont like it
+            # print(self.tab.line) # comment if you dont like it
             self.tab.column += res.span()[1]
             self.tab.capture = res.group()
             self.tab.line = self.tab.line[res.span()[1]:]

@@ -7,11 +7,9 @@ class Data_Type ():
         
 
     def numbr(self):
-        
         return int (self.tab.capture.strip())
     
     def numbar(self):
-        
         return float (self.tab.capture.strip())
     
     def yarn(self):
