@@ -32,7 +32,8 @@ pars.get_rid("^ *")
 
 Variable(tab, pars).main()
 
-while not pars.get_lexemes(["terminate"]):
+while not pars.get_lexemes(["terminate"], False):
+    pars.get_rid("^ *")
     pars.get_lexemes(["statement"])
 
 

@@ -35,7 +35,6 @@ class Variable():
             self.tab.variables[var_name] = self.pars.get_lexemes(["expression", "literal"])
             self.pars.get_rid_new_line()
 
-            print(self.tab.variables)
         
     def put_var(self):
         # gets the 
@@ -49,7 +48,7 @@ class Variable():
         get_var = True if var_name in self.tab.variables.keys() else False
 
         if get_var:
-            return var_name
+            return self.tab.variables[var_name]
         
         print("Semantic Error!!")
         exit()

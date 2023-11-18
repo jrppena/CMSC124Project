@@ -33,7 +33,6 @@ class Parser_Function():
                 '^SMALLR OF ': s.Arithmetic(self.tab, self).smallr,
             },
             "input":{
-                "^GIMMEH ": s.Input(self.tab, self).main
             },
             "literal":{
                 "^-?[0-9]+(\.[0-9]+)? ?": s.Data_Type(self.tab).numbar,
@@ -46,6 +45,8 @@ class Parser_Function():
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_var,
             },
             "statement":{
+                "^GIMMEH ": s.Input(self.tab, self).main,
+                "^VISIBLE ": s.Output(self.tab, self).main,
 
             },
             "terminate": {
@@ -110,7 +111,6 @@ class Parser_Function():
             self.tab.column += res.span()[1]
             self.tab.capture = res.group()
             self.tab.line = self.tab.line[res.span()[1]:]
-            print(self.tab.line)
 
         return res                
     
@@ -136,7 +136,7 @@ class Parser_Function():
 
         return res
     
-    def get_rid_new_line(self):
+    def get_rid_new_line(self, error = True):
         """Get rid new line
         
         This is a strict new line checker. It will also detect if there is a comment
@@ -150,7 +150,10 @@ class Parser_Function():
             self.tab.new_line()
             return True
         
-        self.error_handler()
+        if error:
+            self.error_handler()
+
+        return False
 
 
     def error_handler (self):

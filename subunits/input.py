@@ -13,7 +13,8 @@ class Input():
 
         if get_var:
             self.tab.variables[var]  = input()
-            # print(self.tab.variables)
+            print(self.tab.variables)
+            self.pars.get_rid_new_line()
             return  self.tab.variables[var]
         
         print("Semantic error!!")
