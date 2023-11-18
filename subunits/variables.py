@@ -18,7 +18,7 @@ class Variable():
             self.pars.get_rid("^ *")
 
             if self.pars.get_rid("^BUHBYE ?", False):
-                # self.pars.get_rid_new_line()
+                self.pars.get_rid_new_line()
                 return
 
             # I HAS A <variable>

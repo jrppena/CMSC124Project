@@ -17,4 +17,5 @@ class Data_Type ():
         return self.tab.capture_group[0]
 
     def troof(self): 
-        pass
+        val = self.tab.capture_group[0]
+        return True if val=="WIN" else False

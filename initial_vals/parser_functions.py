@@ -44,10 +44,17 @@ class Parser_Function():
             },
             "variable":{
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_var,
+            },
+            "statement":{
+
+            },
+            "terminate": {
+                "^KTHXBYE ?" :exit, 
+
             }
         }
 
-    def get_lexemes(self, cfg) :
+    def get_lexemes(self, cfg, error=True) :
         """Get lexemes
 
         This is where you implement the 'or' in your cfg. It loops over the
@@ -76,6 +83,9 @@ class Parser_Function():
 
                     return self.cfg[abtraction][reg]()
         else:
+            if not error: 
+                return None
+            
             self.error_handler()
                 
     def __get_data(self, reg):
