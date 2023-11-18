@@ -50,3 +50,6 @@ class Variable():
 
         if get_var:
             return var_name
+        
+        print("Semantic Error!!")
+        exit()
