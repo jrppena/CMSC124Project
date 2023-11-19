@@ -157,13 +157,17 @@ class Parser_Function():
 
 
     def error_handler (self):
-        print("\nSYNTAX ERROR !!")
-        print(f"There is an error in line {self.tab.row+1}:{self.tab.column}")
 
-        print("\nFile")
-        print(f".\{self.tab.file} {self.tab.row+1}:{self.tab.column}")
-        print(f"\t{self.tab.row+1}. | {self.tab.code[self.tab.row]}")
-        print("\t"+" "*len(str(self.tab.row+1))+" "*(self.tab.column+4)+"^")
-        print()
+        self.tab.terminal += f"""
+    SYNTAX ERROR !!
+    There is an error in line {self.tab.row+1}:{self.tab.column}
+
+    File
+    .\{self.tab.file} {self.tab.row+1}:{self.tab.column}
+    \t{self.tab.row+1}. | {self.tab.code[self.tab.row]}
+    \t{' '*len(str(self.tab.row+1))}{' '*(self.tab.column+4)}^
+"""
+        
+        print(self.tab.terminal)
 
         exit()

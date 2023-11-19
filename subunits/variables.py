@@ -50,5 +50,4 @@ class Variable():
         if get_var:
             return self.tab.variables[var_name]
         
-        print("Semantic Error!!")
-        exit()
+        self.tab.semantic_error("Variable not found")

@@ -11,7 +11,7 @@ class Output():
 
     def concatination(self, delimiter= "AN "):
         values = self.tab.line.split(delimiter)
-        print(self.tab.variables)
+        print(values)
 
 
         for val in values: 

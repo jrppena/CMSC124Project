@@ -43,6 +43,20 @@ class Tables_Values:
         }
         
         """
+
+        self.terminal = ""
+        """
+        This is where 
+        
+        """
+        self.lexemes = []
+        """
+        lexemes = [
+            ("lex" , "description"),
+            ("lex" , "description"),
+        ]
+        """
+
         self.stack = []
 
 
@@ -56,3 +70,20 @@ class Tables_Values:
         self.row+=1
         self.line = self.code[self.row]
         self.column =0
+    
+    def semantic_error(self, description):
+        self.terminal += f"""
+    SEMANTIC ERROR !!
+    There is an error in line {self.row+1}:{self.column}
+
+    File:
+    .\{self.file} {self.row+1}:{self.column}
+    \t{self.row+1}. | {self.code[self.row]}
+    \t{' '*len(str(self.row+1))}{' '*(self.column+4 - len(self.capture))}^
+    
+    Description:
+        {description}
+    """
+
+        print(self.terminal)
+        exit()

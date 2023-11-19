@@ -11,11 +11,10 @@ class Input():
         var = self.tab.capture_group[0]
         get_var = True if var in self.tab.variables.keys() else False
 
+        # if the variable is initialize,
         if get_var:
             self.tab.variables[var]  = input()
-            print(self.tab.variables)
             self.pars.get_rid_new_line()
             return  self.tab.variables[var]
         
-        print("Semantic error!!")
-        print(f"{var} is not initialized\n")
+        self.tab.semantic_error(f"\'{var}\' variable is not initialized")
