@@ -10,23 +10,23 @@ class Variable():
         # <undec_variable> ::= (BUHBYE | I HAS A <variable> (<linebreak> | <dec_variable>))
         # <dec_variable> ::= ITZ (<expression> | <literal> | <variable>) <linebreak> <undec_variable>
 
-        self.pars.get_rid("^WAZZUP ?")
+        self.pars.get_rid("^WAZZUP ?", "variables initailization")
         self.pars.get_rid_new_line()
 
         while True:
 
-            self.pars.get_rid("^ *")
+            self.pars.get_rid("^ *", "spacing")
 
-            if self.pars.get_rid("^BUHBYE ?", False):
+            if self.pars.get_rid("^BUHBYE ?","end variables",error= False):
                 self.pars.get_rid_new_line()
                 return
 
             # I HAS A <variable>
-            self.pars.get_rid("^I HAS A ")
+            self.pars.get_rid("^I HAS A ", "variable declaration")
             var_name = self.pars.get_lexemes(["variable"])
 
             # if uninitialized variable set to None, nexline
-            if not self.pars.get_rid("^ITZ ", False):
+            if not self.pars.get_rid("^ITZ ","variable assignment",error=  False):
                 self.tab.variables[var_name] = None
                 self.pars.get_rid_new_line()
                 continue

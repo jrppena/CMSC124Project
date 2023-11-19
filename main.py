@@ -26,15 +26,18 @@ Instructions in getting the classes up and running
 4. to test if it is working you can execute it below this file
 
 """
-pars.get_rid("^HAI ?")
+pars.get_rid("^HAI ?", "code initialized")
 pars.get_rid_new_line()
-pars.get_rid("^ *")
+pars.get_rid("^ *", "spacing")
 
 Variable(tab, pars).main()
 
-while not pars.get_lexemes(["terminate"], False):
-    pars.get_rid("^ *")
+while not pars.get_lexemes(["terminate"], error=False):
+    pars.get_rid("^ *", "spacing")
     pars.get_lexemes(["statement"])
+
+
+
 
 
 

@@ -87,3 +87,8 @@ class Tables_Values:
 
         print(self.terminal)
         exit()
+
+    def exit_program(self):
+        print(self.lexemes)
+
+        exit()

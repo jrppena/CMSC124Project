@@ -50,12 +50,12 @@ class Parser_Function():
 
             },
             "terminate": {
-                "^KTHXBYE ?" :exit, 
+                "^KTHXBYE ?" :self.tab.exit_program, 
 
             }
         }
 
-    def get_lexemes(self, cfg, error=True) :
+    def get_lexemes(self, cfg,  error=True) :
         """Get lexemes
 
         This is where you implement the 'or' in your cfg. It loops over the
@@ -80,7 +80,7 @@ class Parser_Function():
 
         for abtraction in cfg:
             for reg in self.cfg[abtraction]:
-                if res:= self.__get_data(reg):
+                if res:= self.__get_data(reg, abtraction):
 
                     return self.cfg[abtraction][reg]()
         else:
@@ -89,7 +89,7 @@ class Parser_Function():
             
             self.error_handler()
                 
-    def __get_data(self, reg):
+    def __get_data(self, reg, description):
         """Get data
         search if there is a match. If there is a match: 
             add the column (currently being analyzed for error handler);
@@ -110,11 +110,12 @@ class Parser_Function():
             self.tab.capture_group = res.groups()
             self.tab.column += res.span()[1]
             self.tab.capture = res.group()
+            self.tab.lexemes.append((self.tab.capture, description))
             self.tab.line = self.tab.line[res.span()[1]:]
 
         return res                
     
-    def get_rid (self, reg, error = True):
+    def get_rid (self, reg, description, error = True):
         """Get rid
         For context-free grammar with a certain keyword such as 'AN'
         or 'ITZ', 'get_rid' get rid of this keywords. If the keyword is 
@@ -129,7 +130,7 @@ class Parser_Function():
         Examples: 
             self.pars.get_rid("^AN ")
         """
-        res = self.__get_data(reg)
+        res = self.__get_data(reg, description)
     
         if not res and error:
             self.error_handler()
@@ -146,7 +147,7 @@ class Parser_Function():
         Return: (bool) : True if new line is executed
         
         """
-        if self.__get_data("^ *BTW") or self.__get_data("^ *\n"):
+        if self.__get_data("^ *BTW", "comment") or self.__get_data("^ *\n", "newline"):
             self.tab.new_line()
             return True
         
