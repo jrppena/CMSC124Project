@@ -14,7 +14,7 @@ class Variable():
         self.pars.get_rid_new_line()
 
         while True:
-
+            self.pars.get_rid_multiple_lines()
             self.pars.get_rid("^ *", "spacing")
 
             if self.pars.get_rid("^BUHBYE ?","end variables",error= False):

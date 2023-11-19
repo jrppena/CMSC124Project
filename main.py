@@ -26,13 +26,19 @@ Instructions in getting the classes up and running
 4. to test if it is working you can execute it below this file
 
 """
-pars.get_rid("^HAI ?", "code initialized")
+pars.get_rid("^HAI ?", "code initialized", "No lolcode initailization")
 pars.get_rid_new_line()
-pars.get_rid("^ *", "spacing")
+pars.get_rid("^ *", "spacing", error=False)
+pars.get_rid_multiple_lines()
 
 Variable(tab, pars).main()
+pars.get_rid_multiple_lines()
 
-while not pars.get_lexemes(["terminate"], error=False):
+while True:
+    pars.get_rid_multiple_lines()
+    if pars.get_lexemes(["terminate"], error=False):
+        break
+
     pars.get_rid("^ *", "spacing")
     pars.get_lexemes(["statement"])
 

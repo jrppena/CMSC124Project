@@ -64,6 +64,9 @@ class Parser_Function():
 
         Args: 
             cfg (list[str]): List of string which abstractions inculded in the list
+            error(optional| True) - 
+                    if the lexeme is optional toggle False
+                    if strict, non need to put True
 
         Returns: 
             return (Any| None): what ever the function in being executed
@@ -87,7 +90,7 @@ class Parser_Function():
             if not error: 
                 return None
             
-            self.error_handler()
+            self.syntax_error(f"No <{abtraction}> matched. Regex available : {list(self.cfg[abtraction].keys())}")
                 
     def __get_data(self, reg, description):
         """Get data
@@ -98,6 +101,7 @@ class Parser_Function():
 
         Args:
             reg (str): the keyword being removed using regex 
+            description (str): used to described the lexeme got
 
         Returns:
             res (regex class| None):  returns if there is mathc or none
@@ -115,7 +119,7 @@ class Parser_Function():
 
         return res                
     
-    def get_rid (self, reg, description, error = True):
+    def get_rid (self, reg, lex_description, error_description = None, error = True):
         """Get rid
         For context-free grammar with a certain keyword such as 'AN'
         or 'ITZ', 'get_rid' get rid of this keywords. If the keyword is 
@@ -123,6 +127,12 @@ class Parser_Function():
 
         Args:
             reg (str): the keyword being removed using regex 
+            lex_description (str): used to described the lexeme got
+            error_description (str| None): if error ==false non need to put anything
+                        syntaxt erro description
+            error (bool| True): if toggle true if error is needed in absence of the lexemes
+                    if the lexeme is optional toggle False
+                    if strick, non need to put True
 
         Returns:
             res (regex class| None):  returns if there is mathc or none
@@ -130,10 +140,10 @@ class Parser_Function():
         Examples: 
             self.pars.get_rid("^AN ")
         """
-        res = self.__get_data(reg, description)
+        res = self.__get_data(reg, lex_description)
     
         if not res and error:
-            self.error_handler()
+            self.syntax_error(error_description)
 
         return res
     
@@ -144,7 +154,11 @@ class Parser_Function():
         if there is a comment or \n, automatically go to next line.
         else error
 
-        Return: (bool) : True if new line is executed
+        Args:
+            error(optional| True) - toggle true if error is needed that there is no new line
+                    if the newline is optional toggle true
+                    if strick, non need to put True
+        Return: (bool) : True if new line is executed, False if there is no newline of comment
         
         """
         if self.__get_data("^ *BTW", "comment") or self.__get_data("^ *\n", "newline"):
@@ -152,12 +166,19 @@ class Parser_Function():
             return True
         
         if error:
-            self.error_handler()
+            self.syntax_error()
 
         return False
+    
+    def get_rid_multiple_lines(self):
+
+        while True:
+            if not self.get_rid_new_line(error=False):
+                break
+        return
 
 
-    def error_handler (self):
+    def syntax_error (self, error_description):
 
         self.tab.terminal += f"""
     SYNTAX ERROR !!
@@ -167,6 +188,9 @@ class Parser_Function():
     .\{self.tab.file} {self.tab.row+1}:{self.tab.column}
     \t{self.tab.row+1}. | {self.tab.code[self.tab.row]}
     \t{' '*len(str(self.tab.row+1))}{' '*(self.tab.column+4)}^
+
+    Description:
+        {error_description}
 """
         
         print(self.tab.terminal)
