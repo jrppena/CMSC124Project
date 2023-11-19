@@ -17,16 +17,16 @@ class Variable():
             self.pars.get_rid_multiple_lines()
             self.pars.get_rid("^ *", "spacing")
 
-            if self.pars.get_rid("^BUHBYE ?","end variables",error= False):
+            if self.pars.get_rid("^BUHBYE ?","end variables"):
                 self.pars.get_rid_new_line()
                 return
 
             # I HAS A <variable>
-            self.pars.get_rid("^I HAS A ", "variable declaration")
+            self.pars.get_rid("^I HAS A ", "variable declaration", "I HAS A is the keyword for initializing the variable")
             var_name = self.pars.get_lexemes(["variable"])
 
             # if uninitialized variable set to None, nexline
-            if not self.pars.get_rid("^ITZ ","variable assignment",error=  False):
+            if not self.pars.get_rid("^ITZ ","variable assignment"):
                 self.tab.variables[var_name] = None
                 self.pars.get_rid_new_line()
                 continue

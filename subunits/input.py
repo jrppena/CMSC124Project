@@ -7,7 +7,7 @@ class Input():
         self.pars = pars
 
     def main(self):
-        self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "variable name")
+        self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "variable name", "there should be a variable")
         var = self.tab.capture_group[0]
         get_var = True if var in self.tab.variables.keys() else False
 

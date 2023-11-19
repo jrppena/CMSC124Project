@@ -7,19 +7,30 @@ class Output():
         self.concat = ""
 
     def main(self):
-        self.concatination("+ ")
+        self.concatination("^\+ ")
 
-    def concatination(self, delimiter= "AN "):
-        values = self.tab.line.split(delimiter)
-        print(values)
+    def concatination(self, delimiter= "^AN "):
+        # <output>::= VISIBLE <literal> <concat>
+        # <concat> ::= <linebreak> | + <literal> <concat> 
+        self.tab.terminal += str(self.pars.get_lexemes(["literal"]))
 
-
-        for val in values: 
-            self.tab.line = val
-            self.tab.capture = val
-            self.concat += str(self.pars.get_lexemes(["literal"]))
-
-            if self.pars.get_rid_new_line(error=False):
+        while True:
+            if self.pars.get_rid("^! ?","delimeter"):
+                self.pars.get_rid_new_line()
+                break
+            if self.pars.get_rid_new_line(error = False):
+                self.tab.terminal+= "\n"
                 break
 
-        print(self.concat)
+            self.pars.get_rid(delimiter,"delimeter", "There should be '+' to concatinate")
+            self.tab.terminal += str(self.pars.get_lexemes(["literal"])) 
+
+
+
+
+            
+        
+
+
+
+ 

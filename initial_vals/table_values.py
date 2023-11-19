@@ -72,14 +72,15 @@ class Tables_Values:
         self.column =0
     
     def semantic_error(self, description):
+        line = self.code[self.row].strip('\n')
         self.terminal += f"""
     SEMANTIC ERROR !!
     There is an error in line {self.row+1}:{self.column}
 
     File:
     .\{self.file} {self.row+1}:{self.column}
-    \t{self.row+1}. | {self.code[self.row]}
-    \t{' '*len(str(self.row+1))}{' '*(self.column+4 - len(self.capture))}^
+    \t{self.row+1}. | {line}
+    \t{' '*len(str(self.row+1))}{' '*(self.column+4 )}^
     
     Description:
         {description}
@@ -90,6 +91,7 @@ class Tables_Values:
 
     def exit_program(self):
         print(self.variables)
+        print(self.terminal)
         # print(self.lexemes)
 
         exit()

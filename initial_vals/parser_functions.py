@@ -32,12 +32,10 @@ class Parser_Function():
                 '^BIGGR OF ': s.Arithmetic(self.tab, self).biggr,
                 '^SMALLR OF ': s.Arithmetic(self.tab, self).smallr,
             },
-            "input":{
-            },
             "literal":{
-                "^-?[0-9]+(\.[0-9]+)? ?": s.Data_Type(self.tab).numbar,
+                "^-?[0-9]+\.[0-9]+ ?": s.Data_Type(self.tab).numbar,
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
-                "^\"(.*)\" ?": s.Data_Type(self.tab).yarn,
+                "^\"([\w\s.\[\]:()<>,]*)\" ?": s.Data_Type(self.tab).yarn,
                 "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
             },
@@ -83,14 +81,17 @@ class Parser_Function():
 
         for abtraction in cfg:
             for reg in self.cfg[abtraction]:
-                if res:= self.__get_data(reg, abtraction):
-
+                if  self.__get_data(reg, abtraction):
                     return self.cfg[abtraction][reg]()
         else:
             if not error: 
                 return None
             
-            self.syntax_error(f"No <{abtraction}> matched. Regex available : {list(self.cfg[abtraction].keys())}")
+            error_des = f"""
+                No {' '.join([f'<{abs}>' for abs in cfg])} matched. 
+                Regex available : {[reg for abtraction in cfg for reg in self.cfg[abtraction]]}"""
+            
+            self.syntax_error(error_des)
                 
     def __get_data(self, reg, description):
         """Get data
@@ -119,7 +120,7 @@ class Parser_Function():
 
         return res                
     
-    def get_rid (self, reg, lex_description, error_description = None, error = True):
+    def get_rid (self, reg, lex_description, error_description = False):
         """Get rid
         For context-free grammar with a certain keyword such as 'AN'
         or 'ITZ', 'get_rid' get rid of this keywords. If the keyword is 
@@ -128,11 +129,8 @@ class Parser_Function():
         Args:
             reg (str): the keyword being removed using regex 
             lex_description (str): used to described the lexeme got
-            error_description (str| None): if error ==false non need to put anything
+            error_description (str| False): if error ==false non need to put anything
                         syntaxt erro description
-            error (bool| True): if toggle true if error is needed in absence of the lexemes
-                    if the lexeme is optional toggle False
-                    if strick, non need to put True
 
         Returns:
             res (regex class| None):  returns if there is mathc or none
@@ -142,7 +140,7 @@ class Parser_Function():
         """
         res = self.__get_data(reg, lex_description)
     
-        if not res and error:
+        if not res and error_description:
             self.syntax_error(error_description)
 
         return res
@@ -171,6 +169,9 @@ class Parser_Function():
         return False
     
     def get_rid_multiple_lines(self):
+        """Get rid multiple lines
+        Get rids of all newline and comments  
+        """
 
         while True:
             if not self.get_rid_new_line(error=False):
@@ -178,7 +179,7 @@ class Parser_Function():
         return
 
 
-    def syntax_error (self, error_description):
+    def syntax_error (self, error_description = None):
 
         self.tab.terminal += f"""
     SYNTAX ERROR !!
@@ -186,13 +187,14 @@ class Parser_Function():
 
     File
     .\{self.tab.file} {self.tab.row+1}:{self.tab.column}
-    \t{self.tab.row+1}. | {self.tab.code[self.tab.row]}
+    \t{self.tab.row+1}. | {self.tab.code[self.tab.row][:-1]}
     \t{' '*len(str(self.tab.row+1))}{' '*(self.tab.column+4)}^
-
-    Description:
-        {error_description}
 """
-        
-        print(self.tab.terminal)
+        if error_description: 
+            self.tab.terminal += f"""
+        Description:
+            {error_description}
+            """
 
+        print(self.tab.terminal)
         exit()

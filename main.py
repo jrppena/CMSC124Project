@@ -28,7 +28,7 @@ Instructions in getting the classes up and running
 """
 pars.get_rid("^HAI ?", "code initialized", "No lolcode initailization")
 pars.get_rid_new_line()
-pars.get_rid("^ *", "spacing", error=False)
+pars.get_rid("^ *", "spacing")
 pars.get_rid_multiple_lines()
 
 Variable(tab, pars).main()
@@ -36,7 +36,7 @@ pars.get_rid_multiple_lines()
 
 while True:
     pars.get_rid_multiple_lines()
-    if pars.get_lexemes(["terminate"], error=False):
+    if pars.get_lexemes(["terminate"], False):
         break
 
     pars.get_rid("^ *", "spacing")
