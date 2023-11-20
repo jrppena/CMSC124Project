@@ -9,10 +9,10 @@ class Arithmetic():
 
     def main(self):
         # Use main function for the context-free grammar
-        # <number> | <expression> AN <number> | <expression>
-        self.val1 = self.pars.get_lexemes(["number", "expression"])
+        # <expression> | <number> AN <expression> | <number> 
+        self.val1 = self.pars.get_lexemes(["expression" ,"number"])
         self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimeter")
-        self.val2 = self.pars.get_lexemes(["number", "expression"])
+        self.val2 = self.pars.get_lexemes(["expression", "number" ])
         
 
     def add(self):
