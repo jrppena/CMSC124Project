@@ -23,7 +23,7 @@ Instructions in getting the classes up and running
 2. make sure that import your class in .\subunits\__init__.py
 3. add the abtractions and regex in .\init_vals\parser_function.py 
     in self.cfg variable
-4. to test if it is working you can execute it below this file
+
 
 """
 pars.get_rid("^HAI ?", "code initialized", "No lolcode initailization, Add the keyword 'HAI'")
