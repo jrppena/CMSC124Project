@@ -50,4 +50,4 @@ class Variable():
         if get_var:
             return self.tab.variables[var_name]
         
-        self.tab.semantic_error("Variable not found")
+        self.tab.semantic_error(f"Variable '{var_name}' not initialized")
