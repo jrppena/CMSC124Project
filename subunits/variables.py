@@ -9,8 +9,8 @@ class Variable():
         # <init_variables> ::= WAZZUP <linebreak> <undec_variable>
         # <undec_variable> ::= (BUHBYE | I HAS A <variable> (<linebreak> | <dec_variable>))
         # <dec_variable> ::= ITZ (<expression> | <literal> | <variable>) <linebreak> <undec_variable>
-
-        self.pars.get_rid("^WAZZUP ?", "variables initailization")
+        self.pars.get_rid("^ *", "spacing")
+        self.pars.get_rid("^WAZZUP ?", "variables initailization", "use WAZZUP to initaiblize variables")
         self.pars.get_rid_new_line()
 
         while True:
@@ -50,4 +50,4 @@ class Variable():
         if get_var:
             return self.tab.variables[var_name]
         
-        self.tab.semantic_error("Variable not found")
+        self.tab.semantic_error(f"Variable '{var_name}' not initialized")

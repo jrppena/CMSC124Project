@@ -7,7 +7,7 @@ from subunits import *
 tab = Tables_Values()
 pars = Parser_Function(tab)
 
-file = 'testcases\sample3.lol'
+file = r'testcases\vardecinit.lol'
 f = open( file,  'r')
 
 tab.file = file
@@ -26,6 +26,7 @@ Instructions in getting the classes up and running
 
 
 """
+pars.get_rid_multiple_lines()
 pars.get_rid("^HAI ?", "code initialized", "No lolcode initailization, Add the keyword 'HAI'")
 pars.get_rid_new_line()
 pars.get_rid("^ *", "spacing")
