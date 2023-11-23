@@ -48,6 +48,7 @@ class Parser_Function():
                 "^VISIBLE ": s.Output(self.tab, self).main,
 
             },
+            
             "terminate": {
                 "^KTHXBYE ?" :self.tab.exit_program, 
 
@@ -160,6 +161,12 @@ class Parser_Function():
         Return: (bool) : True if new line is executed, False if there is no newline of comment
         
         """
+        
+        # print(self.get_lexemes(["m_comment"], error=False))
+        if self.__get_data("^ *OBTW", "comment"):
+            s.Multiline_Comment(self.tab, self).main()
+            return True
+        
         if self.__get_data("^ *BTW", "comment") or self.__get_data("^ *\n", "newline"):
             self.tab.new_line()
             return True
@@ -198,4 +205,6 @@ class Parser_Function():
             """
 
         print(self.tab.terminal)
+        # print(self.tab.lexemes)
+
         exit()
