@@ -48,7 +48,6 @@ class Parser_Function():
                 "^VISIBLE ": s.Output(self.tab, self).main,
 
             },
-            
             "terminate": {
                 "^KTHXBYE ?" :self.tab.exit_program, 
 
@@ -204,7 +203,4 @@ class Parser_Function():
             {error_description}
             """
 
-        print(self.tab.terminal)
-        # print(self.tab.lexemes)
-
-        exit()
+        raise Exception()
