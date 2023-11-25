@@ -1,6 +1,5 @@
 import subunits as s
 
-import time
 class Input():
 
     def __init__(self, tab , pars) -> None:
