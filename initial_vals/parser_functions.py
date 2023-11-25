@@ -46,6 +46,7 @@ class Parser_Function():
             "statement":{
                 "^GIMMEH ": s.Input(self.tab, self).main,
                 "^VISIBLE ": s.Output(self.tab, self).main,
+                "^IM IN YR ": s.Loops(self.tab,self).main
 
             },
             
