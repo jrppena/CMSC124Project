@@ -6,4 +6,5 @@ from .variables import *
 from .output import *
 from .multiline_comment import *
 from .loops import *
+from .functions import *
 
