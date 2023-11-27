@@ -20,7 +20,6 @@ class Parser_Function():
             "number":{
                 "^-?[0-9]+(\.[0-9]+) ?": s.Data_Type(self.tab).numbar,
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
-                "^\"(-?[0-9]+(\.[0-9]+)?)\" ?" : s.Typecasting(self.tab, self).str_to_num,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
             },  
 
@@ -28,7 +27,7 @@ class Parser_Function():
                 '^SUM OF ' : s.Arithmetic(self.tab, self).add, 
                 '^DIFF OF ': s.Arithmetic(self.tab, self).minus,
                 '^PRODUKT OF ': s.Arithmetic(self.tab, self).mul, 
-                '^QUOSHUNT OF ': s.Arithmetic(self.tab, self).div , 
+                '^QUOSHUNT OF ': s.Arithmetic(self.tab, self).div, 
                 '^MOD OF ': s.Arithmetic(self.tab, self).mod,
                 '^BIGGR OF ': s.Arithmetic(self.tab, self).biggr,
                 '^SMALLR OF ': s.Arithmetic(self.tab, self).smallr,
@@ -38,6 +37,7 @@ class Parser_Function():
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
                 "^\"([\w\s.\[\]:()<>,]*)\" ?": s.Data_Type(self.tab).yarn,
                 "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
+                "^(NUMBR|NUMBAR|YARN|TROOF)$":s.Data_Type(self.tab).type,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
             },
             "variable":{
@@ -47,7 +47,8 @@ class Parser_Function():
                 "^GIMMEH ": s.Input(self.tab, self).main,
                 "^VISIBLE ": s.Output(self.tab, self).main,
                 "^IM IN YR ": s.Loops(self.tab,self).main,
-                "^HOW IZ I ": s.Functions(self.tab,self).main
+                "^HOW IZ I ": s.Functions(self.tab,self).main,
+                "^MAEK " : s.Typecasting(self.tab,self).main,
             },
             
             "terminate": {

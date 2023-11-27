@@ -11,4 +11,4 @@ class Loops():
             capture group: {self.tab.capture_group}
             line: {self.tab.line}
             row: {self.tab.row}
-              """)
+        """)
