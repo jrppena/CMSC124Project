@@ -50,6 +50,10 @@ class Parser_Function():
                 "^HOW IZ I ": s.Functions(self.tab,self).main,
                 "^MAEK " : s.Typecasting(self.tab,self).main,
             },
+            "assignment":{
+                "^R ?": s.Assignment(self.tab,self).assign,
+                "^IS NOW A ?": s.Assignment(self.tab,self).recasting,
+            },
             "terminate": {
                 "^KTHXBYE ?" :self.tab.exit_program, 
 

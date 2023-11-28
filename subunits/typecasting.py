@@ -25,6 +25,9 @@ class Typecasting():
         self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "variable", "there should be a variable")
         var = self.tab.capture_group[0]
         value = s.Variable(self.tab, self).get_var()
+        self.typecast(value)
+        
+    def typecast(self,value):
         type_of_cast = self.pars.get_rid("^(NUMBR|NUMBAR|YARN|TROOF) ?", "type literal", "there should be a type literal").group()
        
         variable_type = type(value).__qualname__
@@ -46,6 +49,7 @@ class Typecasting():
         else:
             # self.tab.variables[var] = new_val
             print("Typecast succesful!: ", new_val)
+            return(new_val)
 
         
     def noob_to_type(self,value,type_of_cast,new_val=None):
