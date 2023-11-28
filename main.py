@@ -4,7 +4,7 @@
 from initial_vals import *
 from subunits import *
 
-tab = Tables_Values()
+tab = Tables_Values(root=True)
 pars = Parser_Function(tab)
 
 file = r'testcases\typecast.lol'

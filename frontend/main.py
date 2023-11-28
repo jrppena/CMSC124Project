@@ -1,7 +1,7 @@
-import tkinter as tk
+from tkinter import *
 from api import Api
 
-root = tk.Tk()
+root = Tk()
 root.geometry("1500x800")
 
 root.title("Lolcode Interpreter")
