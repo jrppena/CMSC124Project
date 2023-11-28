@@ -37,7 +37,6 @@ class Parser_Function():
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
                 "^\"([\w\s.\[\]:()<>,]*)\" ?": s.Data_Type(self.tab).yarn,
                 "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
-                "^(NUMBR|NUMBAR|YARN|TROOF)$":s.Data_Type(self.tab).type,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
             },
             "variable":{

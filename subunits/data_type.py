@@ -19,6 +19,3 @@ class Data_Type ():
         val = self.tab.capture_group[0]
         return True if val=="WIN" else False
 
-    def type(self): 
-        print(self.tab.capture_group)
-        return self.tab.capture.strip()

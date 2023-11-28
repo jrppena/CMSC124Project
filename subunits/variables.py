@@ -33,6 +33,7 @@ class Variable():
             
             # if initialize, can pick between "expression", "literal", "variable" (variable here is inside literal)
             self.tab.variables[var_name] = self.pars.get_lexemes(["expression", "literal"])
+            print(self.tab.variables[var_name])
             self.pars.get_rid_new_line()
 
         
