@@ -23,7 +23,6 @@ class Parser_Function():
                 "^\"(-?[0-9]+(\.[0-9]+)?)\" ?" : s.Typecasting(self.tab, self).str_to_num,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
             },  
-
             "expression":{
                 '^SUM OF ' : s.Arithmetic(self.tab, self).add, 
                 '^DIFF OF ': s.Arithmetic(self.tab, self).minus,
@@ -46,9 +45,18 @@ class Parser_Function():
             "statement":{
                 "^GIMMEH ": s.Input(self.tab, self).main,
                 "^VISIBLE ": s.Output(self.tab, self).main,
-
-            },
             
+            },
+            "boolean": {
+                "^BOTH OF ": s.Boolean(self.tab, self).both_of,
+                "^EITHER OF ": s.Boolean(self.tab, self).either_of,
+                "^WON OF ": s.Boolean(self.tab, self).won_of,
+                "^NOT ": s.Boolean(self.tab, self).not_operation,
+            },
+            "infinite": {
+                "^ALL OF ": s.Boolean(self.tab, self).all_of,
+                "^ANY OF ": s.Boolean(self.tab, self).any_of,
+            },
             "terminate": {
                 "^KTHXBYE ?" :self.tab.exit_program, 
 
@@ -185,7 +193,6 @@ class Parser_Function():
             if not self.get_rid_new_line(error=False):
                 break
         return
-
 
     def syntax_error (self, error_description = None):
 
