@@ -1,5 +1,6 @@
 import subunits as s
 
+import time
 class Input():
 
     def __init__(self, tab , pars) -> None:
@@ -13,7 +14,9 @@ class Input():
 
         # if the variable is initialize,
         if get_var:
-            self.tab.variables[var]  = input()
+            self.tab.show_data()
+            self.tab.root_front.wait_variable(self.tab.buffer)
+            self.tab.variables[var]  = self.tab.buffer.get().strip()
             self.pars.get_rid_new_line()
             return  self.tab.variables[var]
         

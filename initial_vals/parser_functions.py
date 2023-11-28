@@ -49,7 +49,6 @@ class Parser_Function():
                 "^HOW IZ I ": s.Functions(self.tab,self).main,
                 "^MAEK " : s.Typecasting(self.tab,self).main,
             },
-            
             "terminate": {
                 "^KTHXBYE ?" :self.tab.exit_program, 
 
@@ -205,7 +204,4 @@ class Parser_Function():
             {error_description}
             """
 
-        print(self.tab.terminal)
-        # print(self.tab.lexemes)
-
-        exit()
+        raise Exception()
