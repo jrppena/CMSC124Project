@@ -5,4 +5,7 @@ from .input import *
 from .variables import *
 from .output import *
 from .multiline_comment import *
+from .loops import *
+from .functions import *
+from .operations.assignment import *
 
