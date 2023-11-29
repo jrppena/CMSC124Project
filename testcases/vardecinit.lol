@@ -3,6 +3,7 @@ HAI
 
   BTW variable declarations
   BTW initialization of literal values
+  
   I HAS A var1
   I HAS A var2 ITZ 17
   I HAS A var3 ITZ "seventeen"

@@ -4,10 +4,10 @@
 from initial_vals import *
 from subunits import *
 
-tab = Tables_Values()
+tab = Tables_Values(root=True)
 pars = Parser_Function(tab)
 
-file = r'testcases\vardecinit.lol'
+file = r'testcases\typecast.lol'
 f = open( file,  'r')
 
 tab.file = file
@@ -26,22 +26,27 @@ Instructions in getting the classes up and running
 
 
 """
-pars.get_rid_multiple_lines()
-pars.get_rid("^HAI ?", "code initialized", "No lolcode initailization, Add the keyword 'HAI'")
-pars.get_rid_new_line()
-pars.get_rid("^ *", "spacing")
-pars.get_rid_multiple_lines()
-
-Variable(tab, pars).main()
-pars.get_rid_multiple_lines()
-
-while True:
+try: 
     pars.get_rid_multiple_lines()
-    if pars.get_lexemes(["terminate"], False):
-        break
-
+    pars.get_rid("^HAI ?", "code initialized", "No lolcode initailization, Add the keyword 'HAI'")
+    pars.get_rid_new_line()
     pars.get_rid("^ *", "spacing")
-    pars.get_lexemes(["statement"])
+    pars.get_rid_multiple_lines()
+
+    Variable(tab, pars).main()
+    pars.get_rid_multiple_lines()
+
+    while True:
+        pars.get_rid_multiple_lines()
+        if pars.get_lexemes(["terminate"], False):
+            break
+
+        pars.get_rid("^ *", "spacing")
+        pars.get_lexemes(["statement"])
+
+except:
+    # change your printing here
+    print(tab.terminal)
 
 
 

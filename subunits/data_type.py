@@ -4,7 +4,6 @@ class Data_Type ():
 
     def __init__(self, tab) -> None:
         self.tab = tab
-        
 
     def numbr(self):
         return int (self.tab.capture.strip())
@@ -19,3 +18,4 @@ class Data_Type ():
     def troof(self): 
         val = self.tab.capture_group[0]
         return True if val=="WIN" else False
+

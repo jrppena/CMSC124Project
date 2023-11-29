@@ -1,7 +1,7 @@
-
+import tkinter as tk
 
 class Tables_Values:
-    def __init__(self) -> None:
+    def __init__(self, root) -> None:
 
         self.capture = " "
         """Data type (str)
@@ -59,7 +59,9 @@ class Tables_Values:
 
         self.stack = []
 
-
+        self.root_front = root # the root off the frontend
+        self.buffer = " " # the value of the input
+        self.show_data = "" # showing the data in the fronend if input is needed
 
         #  for error handling 
         self.file = " "
@@ -86,14 +88,8 @@ class Tables_Values:
         {description}
     """
 
-        print(self.terminal)
-        # print(self.lexemes)
-
-        exit()
+        raise Exception()
 
     def exit_program(self):
-        print(self.variables)
-        print(self.terminal)
-        # print(self.lexemes)
 
-        exit()
+        raise Exception()

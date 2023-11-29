@@ -27,7 +27,7 @@ class Parser_Function():
                 '^SUM OF ' : s.Arithmetic(self.tab, self).add, 
                 '^DIFF OF ': s.Arithmetic(self.tab, self).minus,
                 '^PRODUKT OF ': s.Arithmetic(self.tab, self).mul, 
-                '^QUOSHUNT OF ': s.Arithmetic(self.tab, self).div , 
+                '^QUOSHUNT OF ': s.Arithmetic(self.tab, self).div, 
                 '^MOD OF ': s.Arithmetic(self.tab, self).mod,
                 '^BIGGR OF ': s.Arithmetic(self.tab, self).biggr,
                 '^SMALLR OF ': s.Arithmetic(self.tab, self).smallr,
@@ -45,7 +45,6 @@ class Parser_Function():
             "statement":{
                 "^GIMMEH ": s.Input(self.tab, self).main,
                 "^VISIBLE ": s.Output(self.tab, self).main,
-            
             },
             "boolean": {
                 "^BOTH OF ": s.Boolean(self.tab, self).both_of,
@@ -56,6 +55,13 @@ class Parser_Function():
             "infinite": {
                 "^ALL OF ": s.Boolean(self.tab, self).all_of,
                 "^ANY OF ": s.Boolean(self.tab, self).any_of,
+                "^IM IN YR ": s.Loops(self.tab,self).main,
+                "^HOW IZ I ": s.Functions(self.tab,self).main,
+                "^MAEK " : s.Typecasting(self.tab,self).main,
+            },
+            "assignment":{
+                "^R ?": s.Assignment(self.tab,self).assign,
+                "^IS NOW A ?": s.Assignment(self.tab,self).recasting,
             },
             "terminate": {
                 "^KTHXBYE ?" :self.tab.exit_program, 
@@ -211,7 +217,4 @@ class Parser_Function():
             {error_description}
             """
 
-        print(self.tab.terminal)
-        # print(self.tab.lexemes)
-
-        exit()
+        raise Exception()
