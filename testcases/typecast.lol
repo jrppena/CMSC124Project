@@ -2,19 +2,23 @@ HAI
 
     WAZZUP 
         BTW asdasdasdasdadas
+        I HAS A var1 ITZ 12
+        I HAS A thing
+        I HAS A thing2 ITZ "some"
+        I HAS A num ITZ 2
+        I HAS A var2 ITZ WIN
+        I HAS A var3 ITZ SUM OF 0 AN 0
 
-        
     BUHBYE
-    I HAS A var1 ITZ 12
-    I HAS A thing
-    I HAS A thing2 ITZ "some"
-    I HAS A num ITZ 2
-    I HAS A var2 ITZ WIN
-    I HAS A var3 ITZ SUM OF 1 AN DIFF OF 10 AN 
+
+    VISIBLE "IT: " + IT
         
-    VISIBLE "var1: " + var1
-    VISIBLE "thing2: " + thing2
+    VISIBLE "var1: " + var1 + " " + SUM OF 1 AN 4
+    VISIBLE "thing2: " + thing2 + " " + ALL OF WIN AN WIN AN WIN AN FAIL AN WIN MKAY
     VISIBLE "var3: " + var3
+
+    SMOOSH "Hello to everyone " AN var3 AN " " AN SUM OF 1 AN 4 AN " " AN ALL OF WIN AN WIN AN WIN AN FAIL AN WIN MKAY
+    VISIBLE "IT: " + IT 
 
     BOTH OF WIN AN FAIL
 
@@ -45,5 +49,13 @@ HAI
     NOT var1
 
     ALL OF var1 AN WIN AN WIN AN var2 AN WIN MKAY
+
+    YA RLY
+        VISIBLE IT
+        VISIBLE "Your in if"
+    NO WAI
+        VISIBLE "Your in else"
+    OIC
+
 
 KTHXBYE

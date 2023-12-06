@@ -58,7 +58,9 @@ class Boolean():
             self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
             self.result = self.result and self.literal1
         
+        
         print("all of:", self.result)
+        return self.result
 
 
     def any_of(self):
@@ -76,5 +78,7 @@ class Boolean():
             self.result = self.result or self.literal1
         
         print("all of:", self.result)
+        return self.result
+
 
    

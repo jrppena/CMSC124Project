@@ -45,6 +45,8 @@ try:
         pars.get_lexemes(["expression","boolean","infinite","statement"])
 
 except:
+    print("\n")
+    print(" -------TERMINAL----")
     # change your printing here
     print(tab.terminal)
 

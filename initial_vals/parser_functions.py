@@ -39,25 +39,14 @@ class Parser_Function():
                 "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
             },
-            "variable":{
-                "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_var,
-            },
             "statement":{
                 "^GIMMEH ": s.Input(self.tab, self).main,
                 "^VISIBLE ": s.Output(self.tab, self).main,
-            },
-            "boolean": {
-                "^BOTH OF ": s.Boolean(self.tab, self).both_of,
-                "^EITHER OF ": s.Boolean(self.tab, self).either_of,
-                "^WON OF ": s.Boolean(self.tab, self).won_of,
-                "^NOT ": s.Boolean(self.tab, self).not_operation,
-            },
-            "infinite": {
-                "^ALL OF ": s.Boolean(self.tab, self).all_of,
-                "^ANY OF ": s.Boolean(self.tab, self).any_of,
                 "^IM IN YR ": s.Loops(self.tab,self).main,
                 "^HOW IZ I ": s.Functions(self.tab,self).main,
                 "^MAEK " : s.Typecasting(self.tab,self).main,
+                "^YA RLY" : s.IfElse(self.tab,self).main,
+                "^SMOOSH ": s.Output(self.tab, self).concatination,
             },
             "boolean": {
                 "^BOTH OF ": s.Boolean(self.tab, self).both_of,
@@ -68,6 +57,7 @@ class Parser_Function():
             "infinite": {
                 "^ALL OF ": s.Boolean(self.tab, self).all_of,
                 "^ANY OF ": s.Boolean(self.tab, self).any_of,
+
             },
             "assignment":{
                 "^R ?": s.Assignment(self.tab,self).assign,
@@ -209,6 +199,32 @@ class Parser_Function():
             if not self.get_rid_new_line(error=False):
                 break
         return
+    
+    def run_lines(self, delimiter, skip = False):
+        """run lines
+        function that will run multi lines of "boolean","infinite", "expression", "statement".
+        you can also skip it if you toggle skip
+
+        Params
+            delimiter (str): regex for the delimeter 
+            skip (bool = False): toggle true if you want to skip the multi lines 
+        """
+        if skip: 
+            while True :
+                self.get_rid("^ *", "spacing")
+                if self.get_rid(delimiter, "delimeter"):
+                    return
+                self.tab.new_line()
+
+        while True:
+            self.get_rid_multiple_lines()
+            self.get_rid("^ *", "spacing")
+
+            if self.get_rid(delimiter, "delimeter"):
+                return
+            
+            self.get_rid("^ *", "spacing")
+            self.get_lexemes(["boolean","infinite", "expression", "statement"])
 
     def syntax_error (self, error_description = None):
 

@@ -8,15 +8,10 @@ class Input():
 
     def main(self):
         self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "variable name", "there should be a variable")
-        var = self.tab.capture_group[0]
-        get_var = True if var in self.tab.variables.keys() else False
+        var = s.Variable(self.tab, self.pars).get_var()
+        self.tab.show_data()
+        self.tab.root_front.wait_variable(self.tab.buffer)
+        self.tab.variables[var]  = self.tab.buffer.get().strip()
+        self.pars.get_rid_new_line()
+        return  self.tab.variables[var]
 
-        # if the variable is initialize,
-        if get_var:
-            self.tab.show_data()
-            self.tab.root_front.wait_variable(self.tab.buffer)
-            self.tab.variables[var]  = self.tab.buffer.get().strip()
-            self.pars.get_rid_new_line()
-            return  self.tab.variables[var]
-        
-        self.tab.semantic_error(f"\'{var}\' variable is not initialized")
