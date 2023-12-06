@@ -50,6 +50,8 @@ HAI
 
     ALL OF var1 AN WIN AN WIN AN var2 AN WIN MKAY
 
+    GIMMEH var1
+
     YA RLY
         VISIBLE IT
         VISIBLE "Your in if"
