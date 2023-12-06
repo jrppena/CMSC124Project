@@ -50,6 +50,16 @@ class Parser_Function():
                 "^HOW IZ I ": s.Functions(self.tab,self).main,
                 "^MAEK " : s.Typecasting(self.tab,self).main,
             },
+            "boolean": {
+                "^BOTH OF ": s.Boolean(self.tab, self).both_of,
+                "^EITHER OF ": s.Boolean(self.tab, self).either_of,
+                "^WON OF ": s.Boolean(self.tab, self).won_of,
+                "^NOT ": s.Boolean(self.tab, self).not_operation,
+            },
+            "infinite": {
+                "^ALL OF ": s.Boolean(self.tab, self).all_of,
+                "^ANY OF ": s.Boolean(self.tab, self).any_of,
+            },
             "assignment":{
                 "^R ?": s.Assignment(self.tab,self).assign,
                 "^IS NOW A ?": s.Assignment(self.tab,self).recasting,

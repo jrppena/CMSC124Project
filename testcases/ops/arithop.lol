@@ -4,7 +4,9 @@ HAI
     if your interpreter does not implement IT,
     move the expressions to the VISIBLE statement
   TLDR
-
+  WAZZUP
+  BUHBYE
+  
   BTW basic expressions
   SUM OF 1 AN 2
   VISIBLE IT
