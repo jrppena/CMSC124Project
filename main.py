@@ -22,7 +22,7 @@ Instructions in getting the classes up and running
 1. Build your class in .\subunits folder
 2. make sure that import your class in .\subunits\__init__.py
 3. add the abtractions and regex in .\init_vals\parser_function.py 
-    in self.cfg variable
+    in self.cfg variablew
 
 
 """
@@ -42,7 +42,7 @@ try:
             break
 
         pars.get_rid("^ *", "spacing")
-        pars.get_lexemes(["statement"])
+        pars.get_lexemes(["expression","boolean","infinite","statement"])
 
 except:
     # change your printing here

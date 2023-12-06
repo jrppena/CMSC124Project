@@ -31,3 +31,4 @@ class Assignment():
         new_val = s.Typecasting(self.tab, self).typecast(value)
         self.tab.variables[var] = new_val
         print("Successfully typecasted!")
+

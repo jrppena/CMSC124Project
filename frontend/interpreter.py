@@ -36,7 +36,7 @@ def interpreter(code, tab):
                 break
 
             pars.get_rid("^ *", "spacing")
-            pars.get_lexemes(["statement"])
+            pars.get_lexemes(["expression","boolean","infinite","statement"])
 
     except:
        
