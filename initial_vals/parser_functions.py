@@ -186,7 +186,7 @@ class Parser_Function():
             return True
         
         if error:
-            self.syntax_error()
+            self.syntax_error("There should be a new line here")
 
         return False
     
