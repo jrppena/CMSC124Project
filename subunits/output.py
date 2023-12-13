@@ -7,10 +7,14 @@ class Output():
         
 
     def main(self):
-        self.concatination("^\+ ")
-        self.tab.terminal += self.tab.variables["IT"]
+        self.__concat("^\+ ")
+        self.tab.terminal += self.concat
 
-    def concatination(self, delimiter= "^AN "):
+    def concatination(self):
+        self.__concat()
+        self.tab.variables["IT"] = self.concat
+
+    def __concat(self, delimiter= "^AN "):
 
         # <output>::= VISIBLE <literal> <concat>
         # <concat> ::= <linebreak> | + <literal> <concat> 
@@ -23,14 +27,13 @@ class Output():
                 self.pars.get_rid_new_line()
                 break
             if self.pars.get_rid_new_line(error = False):
-                self.tab.terminal+= "\n"
+                self.concat+= "\n"
                 break
 
             self.pars.get_rid(delimiter,"delimeter", "There should be '+' to concatinate")
             self.concat += str(self.pars.get_lexemes(["boolean", "infinite","expression", "literal"]))
 
 
-        self.tab.variables["IT"] = self.concat
 
 
 
