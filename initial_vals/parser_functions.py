@@ -48,6 +48,9 @@ class Parser_Function():
                 "^YA RLY" : s.IfElse(self.tab,self).main,
                 "^SMOOSH ": s.Output(self.tab, self).concatination,
             },
+            "skip":{
+                "^YA RLY" : s.IfElse(self.tab,self).skip,
+            },
             "boolean": {
                 "^BOTH OF ": s.Boolean(self.tab, self).both_of,
                 "^EITHER OF ": s.Boolean(self.tab, self).either_of,
@@ -209,12 +212,6 @@ class Parser_Function():
             delimiter (str): regex for the delimeter 
             skip (bool = False): toggle true if you want to skip the multi lines 
         """
-        if skip: 
-            while True :
-                self.get_rid("^ *", "spacing")
-                if self.get_rid(delimiter, "delimeter"):
-                    return
-                self.tab.new_line()
 
         while True:
             self.get_rid_multiple_lines()
@@ -222,9 +219,11 @@ class Parser_Function():
 
             if self.get_rid(delimiter, "delimeter"):
                 return
-            
-            self.get_rid("^ *", "spacing")
-            self.get_lexemes(["boolean","infinite", "expression", "statement"])
+
+            if skip:
+                self.get_lexemes(["skip"], error=False) or self.tab.new_line()
+            else:
+                self.get_lexemes(["boolean","infinite", "expression", "statement"])
 
     def syntax_error (self, error_description = None):
 
