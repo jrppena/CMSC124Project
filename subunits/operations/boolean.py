@@ -4,7 +4,6 @@ class Boolean():
     def __init__(self, tab, pars) -> None:
         self.tab = tab
         self.pars = pars
-        self.operation = ""
         self.literal1 = None
         self.literal2 = None
         self.result = None
@@ -68,5 +67,3 @@ class Boolean():
             self.result = self.result or self.literal1
         
         return self.result
-
-   
