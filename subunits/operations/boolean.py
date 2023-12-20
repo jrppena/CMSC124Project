@@ -4,7 +4,6 @@ class Boolean():
     def __init__(self, tab, pars) -> None:
         self.tab = tab
         self.pars = pars
-        self.operation = ""
         self.literal1 = None
         self.literal2 = None
         self.result = None
@@ -17,31 +16,28 @@ class Boolean():
 
     def both_of(self):
         self.logic_op()
-        print(self.literal1,"and",self.literal2)
         self.result = self.literal1 and self.literal2
-        print(self.result)
+        self.tab.variables["IT"] = self.result
         return self.result
 
     def either_of(self):
         self.logic_op()
-        print(self.literal1,"or",self.literal2)
         self.result = self.literal1 or self.literal2
-        print(self.result)
+        self.tab.variables["IT"] = self.result
         return self.result
 
     def won_of(self):
         # <won_of> ::= WON OF <literal> AN <literal>
         self.logic_op()
-        print(self.literal1,"xor",self.literal2)
         self.result = (self.literal1 or self.literal2) and not (self.literal1 and self.literal2)
-        print("xor:",self.result)
+        self.tab.variables["IT"] = self.result
         return self.result
 
     def not_operation(self):
         # <not_operation> ::= NOT <boolean> | NOT <literal>
         self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
         self.result = not self.literal1
-        print("not:", self.result)
+        self.tab.variables["IT"] = self.result
         return self.result
 
     def all_of(self):
@@ -58,8 +54,7 @@ class Boolean():
             self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
             self.result = self.result and self.literal1
         
-        
-        print("all of:", self.result)
+        self.tab.variables["IT"] = self.result
         return self.result
 
 
@@ -76,9 +71,6 @@ class Boolean():
             self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
             self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
             self.result = self.result or self.literal1
-        
-        print("all of:", self.result)
+
+        self.tab.variables["IT"] = self.result
         return self.result
-
-
-   
