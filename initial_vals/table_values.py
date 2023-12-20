@@ -26,7 +26,7 @@ class Tables_Values:
             this is the line we get the lexemes
         """
 
-        self.variables = {'IT': None}
+        self.variables = {'IT': False}
         """
         variables = {
             "var1": value
@@ -38,7 +38,7 @@ class Tables_Values:
         self.function = {}
         """
         function = {
-            "func1": [code ..],
+            "func1": row number,
             "func2": [code ..],
         }
         
@@ -72,6 +72,8 @@ class Tables_Values:
         self.row+=1
         self.line = self.code[self.row]
         self.column =0
+
+
     
     def semantic_error(self, description):
         line = self.code[self.row].strip('\n')

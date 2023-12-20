@@ -15,20 +15,14 @@ class Typecasting():
         }
 
     def main(self):
-        print(f""" 
-            capture: {self.tab.capture}
-            capture group: {self.tab.capture_group}
-            line: {self.tab.line}
-            row: {self.tab.row}
-        """)
-        
+
         self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "variable", "there should be a variable")
-        var = self.tab.capture_group[0]
         value = s.Variable(self.tab, self).get_var()
         self.typecast(value)
         
     def typecast(self,value):
-        type_of_cast = self.pars.get_rid("^(NUMBR|NUMBAR|YARN|TROOF) ?", "type literal", "there should be a type literal").group()
+        self.pars.get_rid("^(NUMBR|NUMBAR|YARN|TROOF) ?", "type literal", "there should be a type literal")
+        type_of_cast = self.tab.capture
        
         variable_type = type(value).__qualname__
 
@@ -45,7 +39,7 @@ class Typecasting():
         new_val = operation_dict[variable_type](value,type_of_cast)
         
         if new_val == None:
-            print("Cannot typecast")
+            self.tab.semantic_error(f"Cannot typecast {variable_type} to {type_of_cast}")
         else:
             # self.tab.variables[var] = new_val
             print("Typecast succesful!: ", new_val)

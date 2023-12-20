@@ -23,7 +23,8 @@ class Variable():
 
             # I HAS A <variable>
             self.pars.get_rid("^I HAS A ", "variable declaration", "I HAS A is the keyword for initializing the variable")
-            var_name = self.pars.get_lexemes(["variable"])
+            self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "variable", "There should be a variable")
+            var_name = self.tab.capture_group[0]
 
             # if uninitialized variable set to None, nexline
             if not self.pars.get_rid("^ITZ ","variable assignment"):
@@ -32,15 +33,9 @@ class Variable():
                 continue
             
             # if initialize, can pick between "expression", "literal", "variable" (variable here is inside literal)
-            self.tab.variables[var_name] = self.pars.get_lexemes(["expression", "literal"])
-            # print(self.tab.variables[var_name])
+            self.tab.variables[var_name] = self.pars.get_lexemes(["boolean","infinite", "expression", "literal"])
+            print(self.tab.variables[var_name])
             self.pars.get_rid_new_line()
-
-        
-    def put_var(self):
-        # gets the 
-        var_name = self.tab.capture_group[0]
-        return var_name
 
 
     def get_var(self):
