@@ -45,12 +45,12 @@ class Parser_Function():
                 "^IM IN YR ": s.Loops(self.tab,self).main,
                 "^HOW IZ I ": s.Functions(self.tab,self).main,
                 "^MAEK " : s.Typecasting(self.tab,self).main,
-                "^YA RLY" : s.IfElse(self.tab,self).main,
+                "^O RLY\?" : s.IfElse(self.tab,self).main,
                 "^SMOOSH ": s.Output(self.tab, self).concatination,
                 "^(BOTH SAEM|DIFFRINT) ": s.Comparison(self.tab, self).main,
             },
             "skip":{
-                "^YA RLY" : s.IfElse(self.tab,self).skip,
+                "^O RLY\?" : s.IfElse(self.tab,self).skip,
             },
             "boolean": {
                 "^BOTH OF ": s.Boolean(self.tab, self).both_of,
