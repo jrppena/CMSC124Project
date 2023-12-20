@@ -47,6 +47,8 @@ class Parser_Function():
                 "^MAEK " : s.Typecasting(self.tab,self).main,
                 "^YA RLY" : s.IfElse(self.tab,self).main,
                 "^SMOOSH ": s.Output(self.tab, self).concatination,
+                "^([a-zA-Z][a-zA-Z0-9_]*) R ?": s.Assignment(self.tab,self).assign,
+                "^([a-zA-Z][a-zA-Z0-9_]*) IS NOW A ?": s.Assignment(self.tab,self).recasting,
             },
             "skip":{
                 "^YA RLY" : s.IfElse(self.tab,self).skip,
@@ -61,10 +63,6 @@ class Parser_Function():
                 "^ALL OF ": s.Boolean(self.tab, self).all_of,
                 "^ANY OF ": s.Boolean(self.tab, self).any_of,
 
-            },
-            "assignment":{
-                "^R ?": s.Assignment(self.tab,self).assign,
-                "^IS NOW A ?": s.Assignment(self.tab,self).recasting,
             },
             "terminate": {
                 "^KTHXBYE ?" :self.tab.exit_program, 

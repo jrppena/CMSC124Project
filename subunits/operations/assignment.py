@@ -8,7 +8,6 @@ class Assignment():
         self.pars = pars
         self.var = " "
         
-
     def main(self):
         print(f""" 
             capture: {self.tab.capture}
@@ -17,18 +16,28 @@ class Assignment():
             row: {self.tab.row}
         """)
 
-        # self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "variable", "there should be a variable")
-        # var = self.tab.capture_group[0]
-        # value = s.Variable(self.tab, self).get_var()
-        # val = self.pars.get_rid("^(IS NOW A|R) ?", "operation assignment", "there should be either IS NOW A or R").group()
-
     def assign(self):
-        val1 = self.pars.get_lexemes(["literal" ,"expression","statement"])
+        var_name = self.tab.capture_group[0]
+        value = s.Variable(self.tab, self.pars).get_var()        
+        if(self.pars.get_rid("^MAEK ?", "typecasting")):
+            
+            self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "variable", "there should be a variable")
+            self.pars.get_rid("^A ", "delimeter", "there should be an A delimeter")
 
+            other_var = self.tab.capture
+            other_val = s.Variable(self.tab, self.pars).get_var()
+            new_val = s.Typecasting(self.tab, self.pars).typecast(other_val)
+            self.tab.variables[var_name] = new_val
+            print("Successfully typecasted!")
+        else:
+            assigned_value = self.pars.get_lexemes(["literal","variable","expression"])
+            self.tab.variables[var_name] = assigned_value
+            print("Succesfully assigned")
+            
     def recasting(self):
         var = self.tab.capture_group[0]
-        value = s.Variable(self.tab, self).get_var()
-        new_val = s.Typecasting(self.tab, self).typecast(value)
+        value = s.Variable(self.tab, self.pars).get_var()
+        new_val = s.Typecasting(self.tab, self.pars).typecast(value)
         self.tab.variables[var] = new_val
         print("Successfully typecasted!")
 
