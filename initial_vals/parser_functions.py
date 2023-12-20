@@ -47,6 +47,7 @@ class Parser_Function():
                 "^MAEK " : s.Typecasting(self.tab,self).main,
                 "^YA RLY" : s.IfElse(self.tab,self).main,
                 "^SMOOSH ": s.Output(self.tab, self).concatination,
+                "^(BOTH SAEM|DIFFRINT) ": s.Comparison(self.tab, self).main,
             },
             "skip":{
                 "^YA RLY" : s.IfElse(self.tab,self).skip,
@@ -60,7 +61,9 @@ class Parser_Function():
             "infinite": {
                 "^ALL OF ": s.Boolean(self.tab, self).all_of,
                 "^ANY OF ": s.Boolean(self.tab, self).any_of,
-
+            },
+            "comparison": {
+                "^(BOTH SAEM|DIFFRINT) ": s.Comparison(self.tab, self).main,
             },
             "assignment":{
                 "^R ?": s.Assignment(self.tab,self).assign,
