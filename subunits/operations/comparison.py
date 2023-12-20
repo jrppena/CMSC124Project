@@ -18,10 +18,13 @@ class Comparison():
         if self.pars.get_rid("^(BIGGR OF|SMALLR OF) ", "delimiter"):
             checker2 = self.tab.capture_group[0]
             self.literal2 = self.pars.get_lexemes(["expression", "number"])
+            if self.literal1 != self.literal2:
+                self.tab.semantic_error(f"The two values {self.literal1} and {self.literal2} should be the same")
             self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
             self.literal3 = self.pars.get_lexemes(["expression", "number"])
             self.checkRelOp(checker1, checker2)
             self.tab.variables["IT"] = self.result
+            print(self.result)
             return self.result
             
         self.literal3 = self.pars.get_lexemes(["expression", "number"])
@@ -30,6 +33,7 @@ class Comparison():
         elif checker1 == "DIFFRINT":
             self.result = self.literal1 != self.literal3
         self.tab.variables["IT"] = self.result
+        print(self.result)
         return self.result
 
     def checkRelOp(self, checker1, checker2):
