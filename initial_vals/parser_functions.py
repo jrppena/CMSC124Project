@@ -59,6 +59,12 @@ class Parser_Function():
                 "^HOW IZ I ": s.Functions(self.tab,self).main,
                 "^MAEK " : s.Typecasting(self.tab,self).main,
             },
+            "comparison": {
+                "^BOTH SAEM ": s.Comparison(self.tab,self).both_saem,
+                "^DIFFRINT ": s.Comparison(self.tab,self).diffrint,
+                "^BIGGR OF ": s.Comparison(self.tab,self).biggr_of,
+                "^SMALLR OF ": s.Comparison(self.tab,self).smallr_of,
+            },  
             "assignment":{
                 "^R ?": s.Assignment(self.tab,self).assign,
                 "^IS NOW A ?": s.Assignment(self.tab,self).recasting,
