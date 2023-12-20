@@ -18,12 +18,13 @@ class Typecasting():
 
         self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "variable", "there should be a variable")
         value = s.Variable(self.tab, self).get_var()
+        self.pars.get_rid("^A ", "delimeter", "there should be an A delimeter")
+
         self.typecast(value)
         
     def typecast(self,value):
-        self.pars.get_rid("^(NUMBR|NUMBAR|YARN|TROOF) ?", "type literal", "there should be a type literal")
+        self.pars.get_rid("^(NUMBR|NUMBAR|YARN|TROOF)?", "type literal", "there should be a type literal")
         type_of_cast = self.tab.capture
-       
         variable_type = type(value).__qualname__
 
         variable_type = self.type[variable_type]
@@ -36,8 +37,11 @@ class Typecasting():
             'YARN': self.yarn_to_type   
         }
 
-        new_val = operation_dict[variable_type](value,type_of_cast)
-        
+        try:
+            new_val = operation_dict[variable_type](value,type_of_cast)
+        except:
+            new_val = None
+            
         if new_val == None:
             self.tab.semantic_error(f"Cannot typecast {variable_type} to {type_of_cast}")
         else:
