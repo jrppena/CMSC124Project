@@ -48,6 +48,7 @@ class Parser_Function():
                 "^O RLY\?" : s.IfElse(self.tab,self).main,
                 "^SMOOSH ": s.Output(self.tab, self).concatination,
                 "^(BOTH SAEM|DIFFRINT) ": s.Comparison(self.tab, self).main,
+                "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_IT,
             },
             "skip":{
                 "^O RLY\?" : s.IfElse(self.tab,self).skip,
