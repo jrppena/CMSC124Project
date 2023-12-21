@@ -12,4 +12,5 @@ from .operations.assignment import *
 from .operations.boolean import *
 from .operations.comparison import *
 from .ifelse import *
+from .switch import *
 
