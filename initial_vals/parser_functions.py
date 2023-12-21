@@ -46,6 +46,7 @@ class Parser_Function():
                 "^HOW IZ I ": s.Functions(self.tab,self).main,
                 "^MAEK " : s.Typecasting(self.tab,self).main,
                 "^O RLY\?" : s.IfElse(self.tab,self).main,
+                "^WTF\?": s.Switch(self.tab,self).main,
                 "^SMOOSH ": s.Output(self.tab, self).concatination,
                 "^([a-zA-Z][a-zA-Z0-9_]*) R ?": s.Assignment(self.tab,self).assign,
                 "^([a-zA-Z][a-zA-Z0-9_]*) IS NOW A ?": s.Assignment(self.tab,self).recasting,
@@ -54,6 +55,7 @@ class Parser_Function():
             },
             "skip":{
                 "^O RLY\?" : s.IfElse(self.tab,self).skip,
+                "^WTF\?": s.Switch(self.tab,self).skip,
             },
             "boolean": {
                 "^BOTH OF ": s.Boolean(self.tab, self).both_of,
@@ -70,7 +72,6 @@ class Parser_Function():
             },
             "terminate": {
                 "^KTHXBYE ?" :self.tab.exit_program, 
-
             }
         }
 
