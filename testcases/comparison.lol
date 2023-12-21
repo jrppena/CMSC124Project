@@ -1,10 +1,25 @@
 HAI
     WAZZUP
+        I HAS A x ITZ 1
+        I HAS A y ITZ 1
     BUHBYE
-    BOTH SAEM 2 AN 1
-    BOTH SAEM 2 AN 2
-    DIFFRINT 1 AN 1
-    DIFFRINT 1 AN 2
-    BOTH SAEM 2 AN BIGGR OF SUM OF 2 AN 2 AN 1
-    DIFFRINT 3 AN SMALLR OF SUM OF 2 AN 3 AN 4
+    
+    VISIBLE "Value 1: "
+    VISIBLE "Value 2: "
+
+    BTW x==y
+    VISIBLE BOTH SAEM x AN y
+    BTW x!=y
+    VISIBLE DIFFRINT x AN y
+
+    OBTW
+        x >= y
+        x <= y
+        x < y
+        x > y
+    TLDR
+    VISIBLE BOTH SAEM BIGGR OF x AN y AN x
+    VISIBLE BOTH SAEM x AN SMALLR OF x AN y
+    VISIBLE DIFFRINT BIGGR OF x AN y AN x
+    VISIBLE DIFFRINT x AN SMALLR OF x AN y
 KTHXBYE
