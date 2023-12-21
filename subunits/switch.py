@@ -23,4 +23,7 @@ class Switch():
                 self.pars.run_lines(delimiter, skip=True)
         
     def skip(self):
-        self.pars.run_lines("^OIC *", skip=True)
+
+class Switch():
+    def __init__(self, tab, pars) -> None:
+        self.tab = tab
