@@ -24,7 +24,6 @@ class Comparison():
             self.literal3 = self.pars.get_lexemes(["expression", "number"])
             self.checkRelOp(checker1, checker2)
             self.tab.variables["IT"] = self.result
-            print(self.result)
             return self.result
             
         self.literal3 = self.pars.get_lexemes(["expression", "number"])
@@ -33,7 +32,6 @@ class Comparison():
         elif checker1 == "DIFFRINT":
             self.result = self.literal1 != self.literal3
         self.tab.variables["IT"] = self.result
-        print(self.result)
         return self.result
 
     def checkRelOp(self, checker1, checker2):
