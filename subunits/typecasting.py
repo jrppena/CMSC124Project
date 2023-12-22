@@ -85,13 +85,11 @@ class Typecasting():
     
     def numbr_to_type(self,value,type_of_cast,new_val=None):
 
-        p = inflect.engine()
-
         conversion_rules = {
             "NOOB": None,
             "TROOF": False if value == 0.0 else True,
             "NUMBAR": float(value),
-            "YARN": p.number_to_words(value)
+            "YARN": str(value)
         }
         return conversion_rules[type_of_cast]
 
