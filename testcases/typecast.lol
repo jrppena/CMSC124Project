@@ -8,15 +8,11 @@ HAI
         I HAS A num ITZ 2
         I HAS A var2 ITZ WIN
         I HAS A IT ITZ FAIL
-
+        I HAS A temp ITZ 2
     BUHBYE
 
-    YA RLY SUM OF 3 AN 4
-        VISIBLE IT
-        VISIBLE "Your in if"
-    NO WAI
-        VISIBLE "Your in else"
-    OIC
-
-
+    IM IN YR print10 UPPIN YR temp TIL BOTH SAEM temp AN 10
+        VISIBLE temp
+    IM OUTTA YR print10
+    
 KTHXBYE
