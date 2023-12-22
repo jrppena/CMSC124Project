@@ -47,3 +47,6 @@ class Variable():
             return self.tab.variables[var_name]
         
         self.tab.semantic_error(f"Variable '{var_name}' not initialized")
+
+    def put_IT(self):
+        self.tab.variables["IT"] = self.get_var()
