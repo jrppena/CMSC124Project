@@ -275,4 +275,4 @@ class Parser_Function():
             {error_description}
             """
 
-        raise Exception()
+        raise SyntaxError()
