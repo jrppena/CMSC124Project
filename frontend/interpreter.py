@@ -24,8 +24,15 @@ def interpreter(code, tab):
         pars.get_rid_multiple_lines()
         pars.get_rid("^HAI ?", "code initialized", "No lolcode initailization, Add the keyword 'HAI'")
         pars.get_rid_new_line()
-        pars.get_rid("^ *", "spacing")
-        pars.get_rid_multiple_lines()
+
+        while True:
+            pars.get_rid_multiple_lines()
+            pars.get_rid_spacing()
+
+            if pars.get_rid("^WAZZUP ?", "variables initailization"):
+                break
+
+            pars.get_lexemes(["function"])
 
         Variable(tab, pars).main()
         pars.get_rid_multiple_lines()
@@ -35,7 +42,7 @@ def interpreter(code, tab):
             if pars.get_lexemes(["terminate"], False):
                 break
 
-            pars.get_rid("^ *", "spacing")
+            pars.get_rid_spacing()
             pars.get_lexemes(["expression","boolean","infinite","statement"])
 
     except:

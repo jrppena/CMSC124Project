@@ -9,13 +9,11 @@ class Variable():
         # <init_variables> ::= WAZZUP <linebreak> <undec_variable>
         # <undec_variable> ::= (BUHBYE | I HAS A <variable> (<linebreak> | <dec_variable>))
         # <dec_variable> ::= ITZ (<expression> | <literal> | <variable>) <linebreak> <undec_variable>
-        self.pars.get_rid("^ *", "spacing")
-        self.pars.get_rid("^WAZZUP ?", "variables initailization", "use WAZZUP to initaiblize variables")
         self.pars.get_rid_new_line()
 
         while True:
             self.pars.get_rid_multiple_lines()
-            self.pars.get_rid("^ *", "spacing")
+            self.pars.get_rid_spacing()
 
             if self.pars.get_rid("^BUHBYE ?","end variables"):
                 self.pars.get_rid_new_line()
@@ -50,3 +48,4 @@ class Variable():
 
     def put_IT(self):
         self.tab.variables["IT"] = self.get_var()
+
