@@ -57,11 +57,7 @@ class Parser_Function():
                 "^([a-zA-Z][a-zA-Z0-9_]*) R ?": s.Assignment(self.tab,self).assign,
                 "^([a-zA-Z][a-zA-Z0-9_]*) IS NOW A ?": s.Assignment(self.tab,self).recasting,
                 "^(BOTH SAEM|DIFFRINT) ": s.Comparison(self.tab, self).main,
-<<<<<<< HEAD
-                "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_IT,
-=======
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_IT
->>>>>>> d51c07a (Feat: get rid spacing)
             },
             "skip":{
                 "^O RLY\?" : s.IfElse(self.tab,self).skip,
