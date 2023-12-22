@@ -45,6 +45,7 @@ class Typecasting():
         if new_val == None:
             self.tab.semantic_error(f"Cannot typecast {variable_type} to {type_of_cast}")
         else:
+            # uncomment
             # self.tab.variables[var] = new_val
             print("Typecast succesful!: ", new_val)
             return(new_val)
