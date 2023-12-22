@@ -21,6 +21,7 @@ class Parser_Function():
                 "^-?[0-9]+(\.[0-9]+) ?": s.Data_Type(self.tab).numbar,
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
                 "^\"(-?[0-9]+(\.[0-9]+)?)\" ?" : s.Typecasting(self.tab, self).str_to_num,
+                "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
             },  
             "expression":{
@@ -32,10 +33,15 @@ class Parser_Function():
                 '^BIGGR OF ': s.Arithmetic(self.tab, self).biggr,
                 '^SMALLR OF ': s.Arithmetic(self.tab, self).smallr,
             },
+            "input":{
+                "^-?[0-9]+\.[0-9]+": s.Data_Type(self.tab).numbar,
+                "^-?[0-9]+": s.Data_Type(self.tab).numbr,
+                "^(WIN|FAIL)": s.Data_Type(self.tab).troof,
+            },
             "literal":{
                 "^-?[0-9]+\.[0-9]+ ?": s.Data_Type(self.tab).numbar,
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
-                "^\"([\w\s.\[\]:()<>,]*)\" ?": s.Data_Type(self.tab).yarn,
+                "^\"([\w\s.\[\]:()<>,\*!]*)\" ?": s.Data_Type(self.tab).yarn,
                 "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
             },
@@ -51,7 +57,11 @@ class Parser_Function():
                 "^([a-zA-Z][a-zA-Z0-9_]*) R ?": s.Assignment(self.tab,self).assign,
                 "^([a-zA-Z][a-zA-Z0-9_]*) IS NOW A ?": s.Assignment(self.tab,self).recasting,
                 "^(BOTH SAEM|DIFFRINT) ": s.Comparison(self.tab, self).main,
+<<<<<<< HEAD
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_IT,
+=======
+                "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_IT
+>>>>>>> d51c07a (Feat: get rid spacing)
             },
             "skip":{
                 "^O RLY\?" : s.IfElse(self.tab,self).skip,
@@ -69,6 +79,9 @@ class Parser_Function():
             },
             "comparison": {
                 "^(BOTH SAEM|DIFFRINT) ": s.Comparison(self.tab, self).main,
+            },
+            "concatination":{
+                 "^SMOOSH ": s.Output(self.tab, self).concatination,
             },
             "terminate": {
                 "^KTHXBYE ?" :self.tab.exit_program, 
@@ -137,8 +150,14 @@ class Parser_Function():
             self.tab.capture_group = res.groups()
             self.tab.column += res.span()[1]
             self.tab.capture = res.group()
-            self.tab.lexemes.append((self.tab.capture, description))
             self.tab.line = self.tab.line[res.span()[1]:]
+
+            if description in ["newline", "comment"]:
+                self.tab.lexemes.append((self.tab.capture[:-1]+"\\n", description))
+                return res 
+
+            if  description not in ["spacing"]:
+                self.tab.lexemes.append((self.tab.capture, description))
 
         return res                
     
@@ -166,6 +185,18 @@ class Parser_Function():
             self.syntax_error(error_description)
 
         return res
+
+
+    def get_rid_spacing(self):
+        """Get rid of the spacing 
+        The spacing is included in the regex
+        " " and "\t"
+        """
+        if self.__get_data("^[ \t]*", "spacing"):
+            return True
+        
+        return False
+
     
     def get_rid_new_line(self, error = True):
         """Get rid new line
@@ -187,7 +218,10 @@ class Parser_Function():
             s.Multiline_Comment(self.tab, self).main()
             return True
         
-        if self.__get_data("^ *BTW", "comment") or self.__get_data("^ *\n", "newline"):
+        if self.__get_data("^, ?", "soft newline"):
+            return True
+        
+        if self.__get_data("^ *BTW .*", "comment") or self.__get_data("^ *\n", "newline"):
             self.tab.new_line()
             return True
         
@@ -218,7 +252,7 @@ class Parser_Function():
 
         while True:
             self.get_rid_multiple_lines()
-            self.get_rid("^ *", "spacing")
+            self.get_rid_spacing()
 
             if self.get_rid(delimiter, "delimeter"):
                 return
