@@ -3,6 +3,7 @@
 # here you can call you functions 
 from initial_vals import *
 from subunits import *
+import traceback
 
 tab = Tables_Values(root=True)
 pars = Parser_Function(tab)
@@ -52,14 +53,16 @@ try:
         pars.get_rid_spacing()
         pars.get_lexemes(["expression","boolean","infinite","statement"])
 
-except:
+except SyntaxError:
     print("\n")
-    print(tab.lexemes)
     print(" -------TERMINAL----")
     # change your printing here
     print(tab.terminal)
 
-
+except Exception as error:
+    print("\n")
+    print(error)
+    traceback.print_exc()
 
 
 
