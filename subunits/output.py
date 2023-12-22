@@ -19,7 +19,7 @@ class Output():
         # <output>::= VISIBLE <literal> <concat>
         # <concat> ::= <linebreak> | + <literal> <concat> 
         self.concat = ""
-        self.concat += str(self.pars.get_lexemes(["comparison", "boolean", "infinite","expression", "literal"]))
+        self.concat += str(self.pars.get_lexemes(["boolean","concatination", "infinite","expression", "comparison", "literal"]))
 
 
         while True:
@@ -31,7 +31,7 @@ class Output():
                 break
 
             self.pars.get_rid(delimiter,"delimeter", "There should be '+' to concatinate")
-            self.concat += str(self.pars.get_lexemes(["comparison", "boolean", "infinite","expression", "literal"]))
+            self.concat += str(self.pars.get_lexemes(["boolean","concatination",  "infinite","expression", "comparison",  "literal"]))
 
 
 
