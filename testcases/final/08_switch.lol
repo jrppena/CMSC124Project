@@ -12,26 +12,31 @@ HAI
 
 	VISIBLE "Choice: "
 	GIMMEH choice
+	choice IS NOW A NUMBR
 
 	choice
 	WTF?
 		OMG 1
 			VISIBLE "Enter birth year: "
 			GIMMEH input
+			input IS NOW A NUMBR
 			VISIBLE DIFF OF 2022 AN input
 			GTFO
 		OMG 2
 			VISIBLE "Enter bill cost: "
 			GIMMEH input
-			VISIBLE "Tip: " PRODUCKT OF input AN 0.1
+			input IS NOW A NUMBR
+			VISIBLE "Tip: " + PRODUKT OF input AN 0.1
 			GTFO
 		OMG 3
 			VISIBLE "Enter width: "
 			GIMMEH input
-			VISIBLE "Square Area: " PRODUCKT OF input AN input
+			input IS NOW A NUMBR
+			VISIBLE "Square Area: " + PRODUKT OF input AN input
 			GTFO
 		OMG 0
 			VISIBLE "Goodbye"
+			GTFO BTW required because w/o GTFO, it will read the next cases
 		OMGWTF
 			VISIBLE "Invalid Input!"
 	OIC

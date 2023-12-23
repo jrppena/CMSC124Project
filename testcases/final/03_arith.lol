@@ -7,12 +7,14 @@ HAI
     
     GIMMEH x
     GIMMEH y
+    x IS NOW A NUMBR
+    y IS NOW A NUMBR
 
-    VISIBLE x + "+" + y + " = " + SUM OF x AN y
-    VISIBLE x + "-" + y + " = " + DIFF OF x AN y
-    VISIBLE x + "*" + y + " = " + PRODUKT OF x AN y
-    VISIBLE x + "/" + y + " = " + QUOSHUNT OF x AN y
-    VISIBLE x + "%" + y + " = " + MOD OF x AN y
+    VISIBLE x + " plus " + y + " = " + SUM OF x AN y
+    VISIBLE x + " -" + y + " = " + DIFF OF x AN y
+    VISIBLE x + " * " + y + " = " + PRODUKT OF x AN y
+    VISIBLE x + " / " + y + " = " + QUOSHUNT OF x AN y
+    VISIBLE x + " % " + y + " = " + MOD OF x AN y
 
     VISIBLE "max(" + x + "," + y + ") = " + BIGGR OF x AN y
     VISIBLE "min(" + x + "," + y + ") = " + SMALLR OF x AN y
