@@ -41,7 +41,7 @@ class Parser_Function():
             "literal":{
                 "^-?[0-9]+\.[0-9]+ ?": s.Data_Type(self.tab).numbar,
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
-                "^\"([\w\s.\[\]:()<>,\*!'?-=%/]*)\" ?": s.Data_Type(self.tab).yarn,
+                "^\"([-\w\s.\[\]:()<>,\*!'?=/%]*)\" ?": s.Data_Type(self.tab).yarn,
                 "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
             },
@@ -85,9 +85,6 @@ class Parser_Function():
             },
             "terminate": {
                 "^KTHXBYE ?" :self.tab.exit_program, 
-            },
-            "function": {
-                "^HOW IZ I ": s.Functions(self.tab,self).main,
             }
         }
 
@@ -224,7 +221,7 @@ class Parser_Function():
         if self.__get_data("^, ?", "soft newline"):
             return True
         
-        if self.__get_data("^ *BTW .*", "comment") or self.__get_data("^ *\n", "newline") or self.__get_data("^\t*\n", "newline"):
+        if self.__get_data("^[ \t]*BTW .*", "comment") or self.__get_data("^[ \t]*\n", "newline"):
             self.tab.new_line()
             return True
         
