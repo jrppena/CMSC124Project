@@ -55,9 +55,11 @@ try:
 
 except SyntaxError:
     print("\n")
+    print(tab.function)
     print(" -------TERMINAL----")
     # change your printing here
     print(tab.terminal)
+    
 
 except Exception as error:
     print("\n")
