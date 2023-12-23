@@ -6,7 +6,7 @@ class IfElse():
 
     def main(self):
         self.pars.get_rid_new_line()
-        self.pars.get_rid("^ *", "spacing")
+        self.pars.get_rid_spacing()
         self.pars.get_rid("^YA RLY", "if statement", "There should be a 'YA RLY' if-statement")
         self.pars.get_rid_new_line()
         

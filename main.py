@@ -8,7 +8,7 @@ import traceback
 tab = Tables_Values(root=True)
 pars = Parser_Function(tab)
 
-file = r'testcases\typecast.lol'
+file = r'testcases\comparison.lol'
 f = open( file,  'r')
 
 tab.file = file

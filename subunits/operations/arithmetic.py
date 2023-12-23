@@ -17,42 +17,35 @@ class Arithmetic():
 
     def add(self):
         self.main()
-        print(self.val1 , "+", self.val2)
         self.tab.variables["IT"] = self.val1 + self.val2 
         return self.val1 + self.val2
     
     def minus(self):
         self.main()
-        print(self.val1 , "-", self.val2)
         self.tab.variables["IT"] = self.val1 - self.val2 
         return self.val1 - self.val2
     
     def mul(self):
         self.main()
-        print(self.val1 , "*", self.val2)
         self.tab.variables["IT"] = self.val1 * self.val2 
         return self.val1 * self.val2
     
     def div(self):
         self.main()
-        print(self.val1 , "/", self.val2)
         self.tab.variables["IT"] = self.val1 / self.val2 
         return int (self.val1 / self.val2)
     
     def mod (self):
         self.main()
-        print(self.val1 , "%", self.val2)
         self.tab.variables["IT"] = self.val1 % self.val2 
         return self.val1 % self.val2
     
     def biggr(self):
         self.main()
-        print(self.val1 , "max", self.val2)
         self.tab.variables["IT"] = max(self.val1, self.val2 )
         return max(self.val1, self.val2 )
     
     def smallr(self):
         self.main()
-        print(self.val1 , "min", self.val2)
         self.tab.variables["IT"] = min(self.val1, self.val2 )
         return min(self.val1, self.val2 )

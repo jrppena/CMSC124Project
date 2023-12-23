@@ -2,6 +2,7 @@ import initial_vals
 
 class Boolean():
     def __init__(self, tab, pars) -> None:
+        # Initialization for the class
         self.tab = tab
         self.pars = pars
         self.literal1 = None
@@ -9,18 +10,36 @@ class Boolean():
         self.result = None
 
     def logic_op(self):
-        # <logic_op> ::= (BOTH OF | EITHER OF | WON OF) <literal> AN <literal>
+        """
+        LOLCODE Grammar:
+        <logic_op> ::= (BOTH OF | EITHER OF | WON OF) <literal> AN <literal>
+
+        EXAMPLE:
+        BOTH OF <x> AN <y> : <x> and <y>
+        EITHER OF <x> AN <y> : <x> or <y>
+        WON OF <x> AN <y> : (<x> or <y>) and not (<x> and <y>)
+
+        Algorithm:
+        1. Get the first literal (store in literal1 variable)
+        2. Get rid of AN delimiter
+        3. Get the second literal (store in literal2 variable)
+        4. Call the logic_op function
+        5. Store the result of the comparison to IT variable and return result
+
+        """
         self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
         self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
         self.literal2 = self.pars.get_lexemes(["boolean", "literal"])
 
     def both_of(self):
+        # <both_of> ::= BOTH OF <literal> AN <literal>
         self.logic_op()
         self.result = self.literal1 and self.literal2
         self.tab.variables["IT"] = self.result
         return self.result
 
     def either_of(self):
+        # <either_of> ::= EITHER OF <literal> AN <literal>
         self.logic_op()
         self.result = self.literal1 or self.literal2
         self.tab.variables["IT"] = self.result
@@ -34,14 +53,22 @@ class Boolean():
         return self.result
 
     def not_operation(self):
-        # <not_operation> ::= NOT <boolean> | NOT <literal>
+        """
+        LOLCODE Grammar:
+        <not_operation> ::= NOT <literal>
+        """
+        # <not_operation> ::= NOT <literal>
         self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
         self.result = not self.literal1
         self.tab.variables["IT"] = self.result
         return self.result
 
     def all_of(self):
-        # <all_of> ::= ALL OF <boolean> | <literal> AN <boolean> | <literal> <loop> | MKAY
+        """
+        LOLCODE Grammar:
+        <all_of> ::= ALL OF <literal> AN <literal> <loop> | MKAY
+        <loop> ::= AN <literal> <loop> | MKAY
+        """
         self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
         self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
         self.literal2 = self.pars.get_lexemes(["boolean", "literal"])
@@ -59,7 +86,11 @@ class Boolean():
 
 
     def any_of(self):
-        # <any_of> ::= ANY OF <boolean> | <literal> AN <boolean> | <literal> <loop> | MKAY
+        """
+        LOLCODE Grammar:
+        <any_of> ::= ANY OF <literal> AN <literal> <loop> | MKAY
+        <loop> ::= AN <literal> <loop> | MKAY
+        """
         self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
         self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
         self.literal2 = self.pars.get_lexemes(["boolean", "literal"])
