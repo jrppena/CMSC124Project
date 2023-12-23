@@ -79,6 +79,8 @@ class Boolean():
                 break
             self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
             self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
+            if self.literal1 == 0 or self.literal1 == "0": self.literal1 = False 
+            elif self.literal1 == 1 or self.literal == "1": self.literal1 = True
             self.result = self.result and self.literal1
         
         self.tab.variables["IT"] = self.result
@@ -101,6 +103,8 @@ class Boolean():
                 break
             self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
             self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
+            if self.literal1 == 0 or self.literal1 == "0": self.literal1 = False 
+            elif self.literal1 == 1 or self.literal == "1": self.literal1 = True
             self.result = self.result or self.literal1
 
         self.tab.variables["IT"] = self.result

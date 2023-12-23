@@ -28,10 +28,10 @@ class Functions():
         # get variable ka muna
         self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "function name", "there should be a valid function name")
         funcname = self.tab.capture_group[0]
-        func = self.tab.function[funcname]                                        
-
-        # if the function does not exits
-        if not func:
+        try:
+            func = self.tab.function[funcname]
+        except:
+            # if the function does not exits
             self.tab.semantic_error(f"{funcname} does not exist")
         
         # if it exist 
@@ -66,7 +66,8 @@ class Functions():
         elif capture == "IF U SAY SO" and not has_return:
             saved_return = None
         
-        self.tab.go_line(cur_row+1)
+        self.tab.go_line(cur_row)
+        #print(cur_row)
         self.tab.variables = saved_var
         self.tab.variables["IT"] = saved_return
         

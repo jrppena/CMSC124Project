@@ -9,6 +9,7 @@ class Output():
     def main(self):
         self.__concat("^\+ ")
         self.tab.terminal += self.concat
+        print("terminal:", self.tab.terminal)
 
     def concatination(self):
         self.__concat()
@@ -16,11 +17,11 @@ class Output():
 
     def __concat(self, delimiter= "^AN "):
 
-        # <output>::= VISIBLE <literal> <concat>
+        # <output> ::= VISIBLE <literal> <concat>
         # <concat> ::= <linebreak> | + <literal> <concat> 
         self.concat = ""
-        self.concat += str(self.pars.get_lexemes(["boolean","concatination", "infinite","expression", "comparison", "literal"]))
-
+        self.concat += str(self.pars.get_lexemes(["boolean", "concatination", "infinite", "expression", "comparison", "literal"]))
+        print("concat:", str(self.concat))
 
         while True:
             if self.pars.get_rid("^! ?","delimeter"):
@@ -29,18 +30,7 @@ class Output():
             if self.pars.get_rid_new_line(error = False):
                 self.concat+= "\n"
                 break
-
-            self.pars.get_rid(delimiter,"delimeter", "There should be '+' to concatinate")
-            self.concat += str(self.pars.get_lexemes(["boolean","concatination",  "infinite","expression", "comparison",  "literal"]))
-
-
-
-
-
-
-            
         
-
-
-
+            self.pars.get_rid(delimiter, "delimiter", f"There should be {delimiter} to concatinate")
+            self.concat += str(self.pars.get_lexemes(["boolean", "concatination",  "infinite", "expression", "comparison",  "literal"]))
  
