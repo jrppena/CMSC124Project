@@ -45,6 +45,6 @@ def interpreter(code, tab):
             pars.get_rid_spacing()
             pars.get_lexemes(["expression","boolean","infinite","statement"])
 
-    except:
+    except SyntaxError:
        
         return tab

@@ -93,8 +93,9 @@ class Tables_Values:
         {description}
     """
 
-        raise Exception()
+        raise SyntaxError()
 
     def exit_program(self):
 
-        raise Exception()
+        raise SyntaxError()
+
