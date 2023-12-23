@@ -45,12 +45,9 @@ class Typecasting():
         if new_val == None:
             self.tab.semantic_error(f"Cannot typecast {variable_type} to {type_of_cast}")
         else:
-            # uncomment
-            # self.tab.variables[var] = new_val
             print("Typecast succesful!: ", new_val)
             return(new_val)
 
-        
     def noob_to_type(self,value,type_of_cast,new_val=None):
         
         conversion_rules = {
@@ -86,13 +83,11 @@ class Typecasting():
     
     def numbr_to_type(self,value,type_of_cast,new_val=None):
 
-        p = inflect.engine()
-
         conversion_rules = {
             "NOOB": None,
             "TROOF": False if value == 0.0 else True,
             "NUMBAR": float(value),
-            "YARN": p.number_to_words(value)
+            "YARN": str(value)
         }
         return conversion_rules[type_of_cast]
 

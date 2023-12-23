@@ -54,14 +54,15 @@ class Parser_Function():
                 "^O RLY\?" : s.IfElse(self.tab,self).main,
                 "^WTF\?": s.Switch(self.tab,self).main,
                 "^SMOOSH ": s.Output(self.tab, self).concatination,
-                "^([a-zA-Z][a-zA-Z0-9_]*) R ?": s.Assignment(self.tab,self).assign,
-                "^([a-zA-Z][a-zA-Z0-9_]*) IS NOW A ?": s.Assignment(self.tab,self).recasting,
+                "^([a-zA-Z][a-zA-Z0-9_]*) R ": s.Assignment(self.tab,self).assign,
+                "^([a-zA-Z][a-zA-Z0-9_]*) IS NOW A ": s.Assignment(self.tab,self).recasting,
                 "^(BOTH SAEM|DIFFRINT) ": s.Comparison(self.tab, self).main,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_IT
             },
             "skip":{
                 "^O RLY\?" : s.IfElse(self.tab,self).skip,
                 "^WTF\?": s.Switch(self.tab,self).skip,
+                "^IM IN YR " : s.Loops(self.tab,self).skip,
             },
             "boolean": {
                 "^BOTH OF ": s.Boolean(self.tab, self).both_of,

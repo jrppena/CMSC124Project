@@ -73,7 +73,10 @@ class Tables_Values:
         self.line = self.code[self.row]
         self.column =0
 
-
+    def go_line(self, line):
+        self.row = line
+        self.line = self.code[self.row]
+        self.column =0
     
     def semantic_error(self, description):
         line = self.code[self.row].strip('\n')
