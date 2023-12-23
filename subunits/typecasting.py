@@ -25,9 +25,13 @@ class Typecasting():
     def typecast(self,value):
         self.pars.get_rid("^(NUMBR|NUMBAR|YARN|TROOF)?", "type literal", "there should be a type literal")
         type_of_cast = self.tab.capture
-        variable_type = type(value).__qualname__
-
-        variable_type = self.type[variable_type]
+        
+        try:
+            variable_type = type(value).__qualname__
+            variable_type = self.type[variable_type]
+        except:
+            if value == None:
+                variable_type = "NOOB"
 
         operation_dict = {
             'NOOB': self.noob_to_type,
@@ -45,7 +49,6 @@ class Typecasting():
         if new_val == None:
             self.tab.semantic_error(f"Cannot typecast {variable_type} to {type_of_cast}")
         else:
-            print("Typecast succesful!: ", new_val)
             return(new_val)
 
     def noob_to_type(self,value,type_of_cast,new_val=None):

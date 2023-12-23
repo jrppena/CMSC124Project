@@ -49,7 +49,7 @@ class Parser_Function():
                 "^GIMMEH ": s.Input(self.tab, self).main,
                 "^VISIBLE ": s.Output(self.tab, self).main,
                 "^IM IN YR ": s.Loops(self.tab,self).main,
-                "^HOW IZ I ": s.Functions(self.tab,self).main,
+                "^I IZ ": s.Functions(self.tab,self).calling,
                 "^MAEK " : s.Typecasting(self.tab,self).main,
                 "^O RLY\?" : s.IfElse(self.tab,self).main,
                 "^WTF\?": s.Switch(self.tab,self).main,
@@ -58,6 +58,9 @@ class Parser_Function():
                 "^([a-zA-Z][a-zA-Z0-9_]*) IS NOW A ": s.Assignment(self.tab,self).recasting,
                 "^(BOTH SAEM|DIFFRINT) ": s.Comparison(self.tab, self).main,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).put_IT
+            },
+            "function":{
+                "^HOW IZ I ": s.Functions(self.tab,self).instantiation,
             },
             "skip":{
                 "^O RLY\?" : s.IfElse(self.tab,self).skip,
