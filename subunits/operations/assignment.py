@@ -20,18 +20,7 @@ class Assignment():
         var_name = self.tab.capture_group[0]
         value = s.Variable(self.tab, self.pars).get_var()        
         if(self.pars.get_rid("^MAEK ?", "typecasting")):
-            # hindi ba pwede ganito nalang?
-            # s.Typecasting(self.tab, self.pars).main()
-
-            self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "variable", "there should be a variable")
-            other_val = s.Variable(self.tab, self.pars).get_var()
-            # other_val muna
-            # no need ng other_var
-            self.pars.get_rid("^A ", "delimeter", "there should be an A delimeter")
-
-            other_var = self.tab.capture
-   
-            new_val = s.Typecasting(self.tab, self.pars).typecast(other_val)
+            new_val = s.Typecasting(self.tab, self.pars).main()
             self.tab.variables[var_name] = new_val
             print("Successfully typecasted!")
         else:
