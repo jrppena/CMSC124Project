@@ -3,16 +3,22 @@ HAI
         I HAS A x ITZ 1
         I HAS A y ITZ 2
     BUHBYE
-    
-    VISIBLE "Value 1: "
-    VISIBLE x
-    VISIBLE "Value 2: "
-    VISIBLE y
 
-    BTW x==y
-    VISIBLE BOTH SAEM x AN y BTW FALSE
-    BTW x!=y
-    VISIBLE DIFFRINT x AN y BTW TRUE
+    VISIBLE "x:" WIN ", y:" WIN
+    x R WIN
+    y R WIN
+
+    VISIBLE BOTH OF x AN y
+    VISIBLE EITHER OF x AN y
+    VISIBLE WON OF x AN y
+    VISIBLE NOT x
+    VISIBLE ALL OF x AN x AN x AN y MKAY
+    VISIBLE ANY OF y AN y AN y AN 0 MKAY
+    VISIBLE ANY OF BOTH OF x AN EITHER OF NOT x AN y AN y AN NOT y MKAY
+    VISIBLE BOTH OF x AN EITHER OF NOT x AN y
+
+    VISIBLE "x:" FAIL ", y:" WIN
+    x R FAIL
 
     OBTW BTW haha
         x >= y 

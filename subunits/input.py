@@ -21,15 +21,7 @@ class Input():
         self.tab.root_front.wait_variable(self.tab.buffer)
 
         # format the user's input using get_lexemes
-        prev_line = self.tab.line 
-        format_input = self.tab.buffer.get().strip() 
-        self.tab.line = format_input + self.tab.line
-        value = self.pars.get_lexemes(["input"], error=False)
-        if value!= None:
-            self.tab.variables[var_name]  = value
-        else : 
-            self.tab.variables[var_name]  = format_input
-            self.tab.line = prev_line
+        self.tab.variables[var_name] = self.tab.buffer.get().strip() 
 
         # grammar: new line
         self.pars.get_rid_new_line()
