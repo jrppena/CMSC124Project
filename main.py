@@ -8,7 +8,7 @@ import traceback
 tab = Tables_Values(root=True)
 pars = Parser_Function(tab)
 
-file = r'testcases\final\01_variables.lol'
+file = r'testcases\final\05_bool.lol'
 f = open( file,  'r')
 
 tab.file = file
