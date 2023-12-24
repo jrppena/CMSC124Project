@@ -10,42 +10,49 @@ class Arithmetic():
     def main(self):
         # Use main function for the context-free grammar
         # <expression> | <number> AN <expression> | <number> 
-        self.val1 = self.pars.get_lexemes(["expression" ,"number"])
+        self.val1 = self.pars.get_lexemes(["expression", "number"])
         self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimeter")
-        self.val2 = self.pars.get_lexemes(["expression", "number" ])
+        self.val2 = self.pars.get_lexemes(["expression", "number"])
         
 
     def add(self):
         self.main()
         self.tab.variables["IT"] = self.val1 + self.val2 
+        print("plus: ", str(self.val1), str(self.val2))
         return self.val1 + self.val2
     
     def minus(self):
         self.main()
-        self.tab.variables["IT"] = self.val1 - self.val2 
+        self.tab.variables["IT"] = self.val1 - self.val2
+        print("minus: ", self.tab.variables["IT"])
         return self.val1 - self.val2
     
     def mul(self):
         self.main()
-        self.tab.variables["IT"] = self.val1 * self.val2 
+        self.tab.variables["IT"] = self.val1 * self.val2
+        print("mul: ", self.tab.variables["IT"])
         return self.val1 * self.val2
     
     def div(self):
         self.main()
         self.tab.variables["IT"] = self.val1 / self.val2 
-        return int (self.val1 / self.val2)
+        print("div: ", self.tab.variables["IT"])
+        return self.val1 / self.val2
     
     def mod (self):
         self.main()
-        self.tab.variables["IT"] = self.val1 % self.val2 
+        self.tab.variables["IT"] = self.val1 % self.val2
+        print("mod: ", self.tab.variables["IT"])
         return self.val1 % self.val2
     
     def biggr(self):
         self.main()
-        self.tab.variables["IT"] = max(self.val1, self.val2 )
-        return max(self.val1, self.val2 )
+        self.tab.variables["IT"] = max(self.val1, self.val2)
+        print("biggr: ", self.tab.variables["IT"])
+        return max(self.val1, self.val2)
     
     def smallr(self):
         self.main()
-        self.tab.variables["IT"] = min(self.val1, self.val2 )
+        self.tab.variables["IT"] = min(self.val1, self.val2)
+        print("smallr: ", self.tab.variables["IT"])
         return min(self.val1, self.val2 )

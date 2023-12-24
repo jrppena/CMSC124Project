@@ -24,14 +24,9 @@ class Assignment():
             new_val = s.Typecasting(self.tab, self.pars).main()
         else:
             new_val = self.pars.get_lexemes(["expression","boolean","infinite", "concatination", "literal"]) # huli yung literal, walang variable
+            
+        self.tab.variables[var_name] = new_val
 
-        if value == None: 
-            if(type(new_val) == bool):
-                self.tab.variables[var_name] = new_val
-            else:
-                self.tab.semantic_error("Cannot assign NOOB to data type other than TROOF!")
-        else:
-            self.tab.variables[var_name] = new_val
             
     def recasting(self):
         var = self.tab.capture_group[0]
