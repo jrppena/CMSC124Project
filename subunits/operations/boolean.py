@@ -31,12 +31,6 @@ class Boolean():
         self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
         self.literal2 = self.pars.get_lexemes(["boolean", "literal"])
 
-        # Checks value of literal if 0 or 1 or WIN or FAIL and converts it to True or False
-        if self.literal1 == 0 or self.literal1 == "0": self.literal1 = False
-        elif self.literal1 == 1 or self.literal1 == "1": self.literal1 = True
-        if self.literal2 == 0 or self.literal2 == "0": self.literal2 = False
-        elif self.literal2 == 1 or self.literal2 == "1": self.literal2 = True
-
     def both_of(self):
         # <both_of> ::= BOTH OF <literal> AN <literal>
         self.logic_op()
