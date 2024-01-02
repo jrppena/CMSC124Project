@@ -34,21 +34,21 @@ class Boolean():
     def both_of(self):
         # <both_of> ::= BOTH OF <literal> AN <literal>
         self.logic_op()
-        self.result = self.literal1 and self.literal2
+        self.result = bool(self.literal1 and self.literal2)
         self.tab.variables["IT"] = self.result
         return self.result
 
     def either_of(self):
         # <either_of> ::= EITHER OF <literal> AN <literal>
         self.logic_op()
-        self.result = self.literal1 or self.literal2
+        self.result = bool(self.literal1 or self.literal2)
         self.tab.variables["IT"] = self.result
         return self.result
 
     def won_of(self):
         # <won_of> ::= WON OF <literal> AN <literal>
         self.logic_op()
-        self.result = (self.literal1 or self.literal2) and not (self.literal1 and self.literal2)
+        self.result = bool((self.literal1 or self.literal2) and not (self.literal1 and self.literal2))
         self.tab.variables["IT"] = self.result
         return self.result
 
@@ -59,7 +59,7 @@ class Boolean():
         """
         # <not_operation> ::= NOT <literal>
         self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
-        self.result = not self.literal1
+        self.result = bool(not self.literal1)
         self.tab.variables["IT"] = self.result
         return self.result
 
@@ -72,7 +72,7 @@ class Boolean():
         self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
         self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
         self.literal2 = self.pars.get_lexemes(["boolean", "literal"])
-        self.result = self.literal1 and self.literal2
+        self.result = bool(self.literal1 and self.literal2)
 
         while True:
             if self.pars.get_rid("^MKAY ?", "delimiter"):
@@ -81,7 +81,7 @@ class Boolean():
             self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
             if self.literal1 == 0 or self.literal1 == "0": self.literal1 = False 
             elif self.literal1 == 1 or self.literal == "1": self.literal1 = True
-            self.result = self.result and self.literal1
+            self.result = bool(self.result and self.literal1)
         
         self.tab.variables["IT"] = self.result
         return self.result
@@ -96,7 +96,7 @@ class Boolean():
         self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
         self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
         self.literal2 = self.pars.get_lexemes(["boolean", "literal"])
-        self.result = self.literal1 or self.literal2
+        self.result = bool(self.literal1 or self.literal2)
 
         while True:
             if self.pars.get_rid("^MKAY ?", "delimiter"):
@@ -105,7 +105,8 @@ class Boolean():
             self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
             if self.literal1 == 0 or self.literal1 == "0": self.literal1 = False 
             elif self.literal1 == 1 or self.literal == "1": self.literal1 = True
-            self.result = self.result or self.literal1
+            self.result = bool(self.result or self.literal1)
 
         self.tab.variables["IT"] = self.result
         return self.result
+    
