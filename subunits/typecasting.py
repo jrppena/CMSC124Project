@@ -100,9 +100,10 @@ class Typecasting():
         conversion_rules = {
             "NOOB": None,
             "TROOF": False if value == "" else True,
-            "NUMBAR": float(value) if value.isdigit() else None,
-            "NUMBR": int(value) if value.isdigit() else None,
+            "NUMBAR": float(value),
+            "NUMBR": int(value)
         }
+
         return conversion_rules[type_of_cast]
 
     def str_to_num(self) -> int: 
