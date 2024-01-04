@@ -1,7 +1,7 @@
 
 ## Installation
 
-* to install the depandency. wich is the tkinter
+* to install the tkinter dependency
 
 ```
 pip install tk
