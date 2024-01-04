@@ -37,29 +37,29 @@ class Comparison():
             6.3. Store the result of the comparison to IT variable and return result
         """
 
-        checker1 = self.tab.capture_group[0] # checker variable for BOTH SAEM or DIFFRINT
-        self.literal1 = self.pars.get_lexemes(["expression", "number"]) # gets the first literal (assume it as <x>)
-        self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter") # gets rid of AN delimiter
+        checker1 = self.tab.capture_group[0]
+        self.literal1 = self.pars.get_lexemes(["expression", "number"])
+        self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
 
         # Checks if the next lexeme has a "BIGGR OF" or "SMALLR OF" keyword
         if self.pars.get_rid("^(BIGGR OF|SMALLR OF) ", "delimiter"):
-            checker2 = self.tab.capture_group[0] # checker variable for BIGGR OF or SMALLR OF
-            self.literal2 = self.pars.get_lexemes(["expression", "number"]) # gets the second literal (assume it as <x> too)
-            if self.literal1 != self.literal2: # checks if the two literals are the same since the rule is that: BOTH SAEM <x> AN BIGGR OF <x> AN <y> || <x> should be the same
-                self.tab.semantic_error(f"The two values {self.literal1} and {self.literal2} should be the same") # raises an error if the two literals are not the same
-            self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter") # gets rid of AN delimiter
-            self.literal3 = self.pars.get_lexemes(["expression", "number"]) # gets the third literal (assume it as <y>)
-            self.checkRelOp(checker1, checker2) # calls the checkRelOp function
-            self.tab.variables["IT"] = self.result # sets the IT variable to the result of the comparison
-            return self.result # returns the result of the comparison
+            checker2 = self.tab.capture_group[0]
+            self.literal2 = self.pars.get_lexemes(["expression", "number"])
+            if self.literal1 != self.literal2:
+                self.tab.semantic_error(f"The two values {self.literal1} and {self.literal2} should be the same")
+            self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
+            self.literal3 = self.pars.get_lexemes(["expression", "number"]) 
+            self.checkRelOp(checker1, checker2)
+            self.tab.variables["IT"] = self.result
+            return self.result 
             
-        self.literal2 = self.pars.get_lexemes(["expression", "number"]) # gets the second literal if there is no "BIGGR/SMALLR OF" keyword (assume it as <y>)
+        self.literal2 = self.pars.get_lexemes(["expression", "number"])
         if checker1 == "BOTH SAEM":
-            self.result = self.literal1 == self.literal2 # checks if the two literals are the same
+            self.result = self.literal1 == self.literal2
         elif checker1 == "DIFFRINT":
-            self.result = self.literal1 != self.literal2 # checks if the two literals are not the same
-        self.tab.variables["IT"] = self.result # sets the IT variable to the result of the comparison
-        return self.result # returns the result
+            self.result = self.literal1 != self.literal2
+        self.tab.variables["IT"] = self.result 
+        return self.result 
 
     # For comparisons with relational operations (BIGGR OF or SMALLR OF)
     def checkRelOp(self, checker1, checker2):
