@@ -252,7 +252,7 @@ class Parser_Function():
                 break
         return
     
-    def run_lines(self, delimiter: str, skip : bool = False):
+    def run_lines(self, delimiter, skip = False):
         """run lines
         function that will run multi lines of "boolean","infinite", "expression", "statement".
         you can also skip it if you toggle skip
