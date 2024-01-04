@@ -1,4 +1,3 @@
-
 import subunits as s
 
 class Functions():
@@ -7,7 +6,7 @@ class Functions():
         self.tab = tab
         self.pars = pars
 
-    def main(self):
+    def main(self): # patanggal lahat ng main na di ginagamit
         print(f""" 
             capture: {self.tab.capture}
             capture group: {self.tab.capture_group}
@@ -47,9 +46,11 @@ class Functions():
         saved_var = self.tab.variables  
         
         self.tab.variables = dict(zip(keys, val))
+        # palagyan ng IT = None
         print(self.tab.variables)
         has_return = False          # checker ng return
 
+        # 'GTFO ?' baka hindi pumasok sa 'GTFO' condition mo sa baba
         self.pars.run_lines("^(FOUND YR |GTFO ?|IF U SAY SO)") # run until return or delimiter
         capture = self.tab.capture_group[0] # get results
 
@@ -71,7 +72,7 @@ class Functions():
         self.tab.variables = saved_var
         self.tab.variables["IT"] = saved_return
         
-    def __get_variables(self,instantiation = False):
+    def __get_variables(self, instantiation = False):
         variable = []
         
         if not self.pars.get_rid_new_line(error = False):
@@ -83,6 +84,7 @@ class Functions():
             else:
                 variable.append(self.pars.get_lexemes(["expression","boolean","infinite", "concatination", "literal"]))
        
+        # delimiter = "^YR "
         while True:
             if self.pars.get_rid_new_line(error = False) or self.pars.get_rid("^MKAY", "delimeter"):
                 break
@@ -95,6 +97,28 @@ class Functions():
                 variable.append(var)
             else:
                 variable.append(self.pars.get_lexemes(["expression","boolean","infinite", "concatination", "literal"]))
-       
 
         return variable
+
+""" Pwede bang ganito nalang __get_variable function?
+        variable = []
+        delimiter = "^YR "
+        while True:
+            if self.pars.get_rid_new_line(error = False) or self.pars.get_rid("^MKAY", "delimeter"):
+                break
+        
+            self.pars.get_rid(delimiter, "delimeter","There must be a delimeter '{delimiter}'")
+
+            if instantiation:
+                self.pars.get_rid("([a-zA-Z][a-zA-Z0-9_]*) ?", "variable", "There must be a variable")
+                var = self.tab.capture_group[0]
+                variable.append(var)
+            else:
+                variable.append(self.pars.get_lexemes(["expression","boolean","infinite", "concatination", "literal"]))
+       
+            delimiter = "^AN YR "'
+
+        return variable
+"""
+
+        

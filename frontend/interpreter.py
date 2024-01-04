@@ -29,20 +29,22 @@ def interpreter(code, tab):
             pars.get_rid_multiple_lines()
             pars.get_rid_spacing()
 
-            if pars.get_rid("^WAZZUP ?", "variables initailization"):
+            if not pars.get_rid("^HOW IZ I ", "function", match=True):
                 break
 
             pars.get_lexemes(["function"])
-
+        
+        pars.get_rid("^WAZZUP ?", "variables initailization","Variables sould be initialized using 'WAZZUP'" )
         Variable(tab, pars).main()
         pars.get_rid_multiple_lines()
 
         while True:
             pars.get_rid_multiple_lines()
+            pars.get_rid_spacing()
+
             if pars.get_lexemes(["terminate"], False):
                 break
 
-            pars.get_rid_spacing()
             pars.get_lexemes(["expression","boolean","infinite","statement"])
 
     except SyntaxError:
