@@ -8,6 +8,7 @@ class Loops():
 
     def main(self):
 
+        # walang carat regex
         self.pars.get_rid("([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
         label = self.tab.capture_group[0]
 

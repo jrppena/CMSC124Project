@@ -31,7 +31,7 @@ class Variable():
                 continue
             
             # if initialize, can pick between "expression", "literal", "variable" (variable here is inside literal)
-            self.tab.variables[var_name] = self.pars.get_lexemes(["boolean","infinite", "expression", "literal"])
+            self.tab.variables[var_name] = self.pars.get_lexemes(["boolean","infinite", "expression","concatination", "comparison" ,"literal"])
             print(self.tab.variables[var_name])
             self.pars.get_rid_new_line()
 
@@ -48,4 +48,13 @@ class Variable():
 
     def put_IT(self):
         self.tab.variables["IT"] = self.get_var()
+
+    def num_var(self):
+        var_name = self.tab.capture_group[0]
+        val = self.get_var()
+
+        if type(val).__qualname__ == 'str' :
+            self.tab.semantic_error(f"The variable {var_name} is a YARN")
+        
+        return val
 
