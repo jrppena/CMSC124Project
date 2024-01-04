@@ -64,7 +64,7 @@ class Comparison():
     # For comparisons with relational operations (BIGGR OF or SMALLR OF)
     def checkRelOp(self, checker1, checker2):
         """
-        Grammar:
+        LOLCODE Grammar:
         BOTH SAEM <x> AN BIGGR OF <x> AN <y> : <x> >= <y>
         BOTH SAEM <x> AN SMALLR OF <x> AN <y> : <x> <= <y>
         DIFFRINT <x> AN BIGGR OF <x> AN <y> : <x> < <y>
@@ -78,4 +78,3 @@ class Comparison():
             self.result = self.literal2 < self.literal3
         elif checker1 == "DIFFRINT" and checker2 == "SMALLR OF":
             self.result = self.literal2 > self.literal3
-        
