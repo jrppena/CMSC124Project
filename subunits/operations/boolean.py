@@ -1,6 +1,6 @@
 import initial_vals
 
-class  Boolean_Temp():
+class Boolean_Temp():
     def __init__(self, tab, pars) -> None:
         # Initialization for the class
         self.tab = tab
