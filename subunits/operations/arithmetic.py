@@ -1,11 +1,9 @@
 import initial_vals
 
-class Arithmetic():
+class Arithmetic_Temp():
     def __init__(self, tab, pars) -> None:
         self.tab = tab
         self.pars = pars
-        self.val1 = 0
-        self.val2 = 0
 
     def main(self):
         # Use main function for the context-free grammar
@@ -18,41 +16,56 @@ class Arithmetic():
     def add(self):
         self.main()
         self.tab.variables["IT"] = self.val1 + self.val2 
-        print("plus: ", str(self.val1), str(self.val2))
         return self.val1 + self.val2
     
     def minus(self):
         self.main()
         self.tab.variables["IT"] = self.val1 - self.val2
-        print("minus: ", self.tab.variables["IT"])
         return self.val1 - self.val2
     
     def mul(self):
         self.main()
         self.tab.variables["IT"] = self.val1 * self.val2
-        print("mul: ", self.tab.variables["IT"])
         return self.val1 * self.val2
     
     def div(self):
         self.main()
         self.tab.variables["IT"] = self.val1 / self.val2 
-        print("div: ", self.tab.variables["IT"])
         return self.val1 / self.val2
     
     def mod (self):
         self.main()
         self.tab.variables["IT"] = self.val1 % self.val2
-        print("mod: ", self.tab.variables["IT"])
         return self.val1 % self.val2
     
     def biggr(self):
         self.main()
         self.tab.variables["IT"] = max(self.val1, self.val2)
-        print("biggr: ", self.tab.variables["IT"])
         return max(self.val1, self.val2)
     
     def smallr(self):
         self.main()
         self.tab.variables["IT"] = min(self.val1, self.val2)
-        print("smallr: ", self.tab.variables["IT"])
         return min(self.val1, self.val2 )
+    
+class Arithmetic():
+    def __init__(self, tab, pars) -> None:
+        self.tab = tab
+        self.pars = pars
+
+    def add(self):
+        return Arithmetic_Temp(self.tab, self.pars).add()
+    def minus(self):
+        return Arithmetic_Temp(self.tab, self.pars).minus()
+    def mul(self):
+        return Arithmetic_Temp(self.tab, self.pars).mul()
+    def div(self):
+        return Arithmetic_Temp(self.tab, self.pars).div()
+    def mod(self):
+        return Arithmetic_Temp(self.tab, self.pars).mod()
+    def biggr(self):
+        return Arithmetic_Temp(self.tab, self.pars).biggr()
+    def smallr(self):
+        return Arithmetic_Temp(self.tab, self.pars).smallr()
+    
+# TODO: BIGGR OF x AN BIGGR OF y AN 5

@@ -22,7 +22,7 @@ class Parser_Function():
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
                 "^\"(-?[0-9]+(\.[0-9]+)?)\" ?" : s.Typecasting(self.tab, self).str_to_num,
                 "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
-                "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
+                "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).num_var,
             },  
             "expression":{
                 '^SUM OF ' : s.Arithmetic(self.tab, self).add, 
@@ -33,15 +33,10 @@ class Parser_Function():
                 '^BIGGR OF ': s.Arithmetic(self.tab, self).biggr,
                 '^SMALLR OF ': s.Arithmetic(self.tab, self).smallr,
             },
-            "input":{
-                "^-?[0-9]+\.[0-9]+": s.Data_Type(self.tab).numbar,
-                "^-?[0-9]+": s.Data_Type(self.tab).numbr,
-                "^(WIN|FAIL)": s.Data_Type(self.tab).troof,
-            },
             "literal":{
                 "^-?[0-9]+\.[0-9]+ ?": s.Data_Type(self.tab).numbar,
                 "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
-                "^\"([-\w\s.\[\]:()<>,\*!'?=/%]*)\" ?": s.Data_Type(self.tab).yarn,
+                "^\"([-\w\s.\[\]:()<>,\*!'?=/%]*)\" ?": s.Data_Type(self.tab).yarn, 
                 "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
                 "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).get_var,
             },
@@ -88,7 +83,7 @@ class Parser_Function():
             }
         }
 
-    def get_lexemes(self, cfg,  error=True) :
+    def get_lexemes(self, cfg,  error=True, match=False) :
         """Get lexemes
 
         This is where you implement the 'or' in your cfg. It loops over the
@@ -114,21 +109,21 @@ class Parser_Function():
             print(pars.get_lexemes(["expression"]))
         """
 
+        self.__line_contn()
         for abtraction in cfg:
             for reg in self.cfg[abtraction]:
-                if  self.__get_data(reg, abtraction):
+                if  self.__get_data(reg, abtraction, match=match):
                     return self.cfg[abtraction][reg]()
         else:
             if not error: 
                 return None
             
             error_des = f"""
-                No {' '.join([f'<{abs}>' for abs in cfg])} matched. 
-                Regex available : {[reg for abtraction in cfg for reg in self.cfg[abtraction]]}"""
+                No {' '.join([f'<{abs}>' for abs in cfg])} matched."""
             
             self.syntax_error(error_des)
                 
-    def __get_data(self, reg, description):
+    def __get_data(self, reg, description, match = False):
         """Get data
         search if there is a match. If there is a match: 
             add the column (currently being analyzed for error handler);
@@ -144,6 +139,9 @@ class Parser_Function():
         
         """
         res = re.search(reg, self.tab.line)
+
+        if match:
+            return res
     
         if res:
             # print(self.tab.line) # comment if you dont like it
@@ -153,15 +151,21 @@ class Parser_Function():
             self.tab.line = self.tab.line[res.span()[1]:]
 
             if description in ["newline", "comment"]:
-                self.tab.lexemes.append((self.tab.capture[:-1]+"\\n", description))
+                self.tab.lexemes.append((self.tab.capture.strip()+"\\n", description))
                 return res 
 
             if  description not in ["spacing"]:
                 self.tab.lexemes.append((self.tab.capture, description))
 
-        return res                
+        return res   
+
+    def __line_contn(self):
+        if self.__get_data("^[ \t]*\.\.\. ?", "line continuation"):
+            self.get_rid_new_line()
+            self.get_rid_spacing()
+
     
-    def get_rid (self, reg, lex_description, error_description = False):
+    def get_rid (self, reg, lex_description, error_description = False, match = False):
         """Get rid
         For context-free grammar with a certain keyword such as 'AN'
         or 'ITZ', 'get_rid' get rid of this keywords. If the keyword is 
@@ -179,7 +183,9 @@ class Parser_Function():
         Examples: 
             self.pars.get_rid("^AN ")
         """
-        res = self.__get_data(reg, lex_description)
+        
+        self.__line_contn()
+        res = self.__get_data(reg, lex_description, match=match)
     
         if not res and error_description:
             self.syntax_error(error_description)
@@ -198,7 +204,7 @@ class Parser_Function():
         return False
 
     
-    def get_rid_new_line(self, error = True):
+    def get_rid_new_line(self, error = True, match = False):
         """Get rid new line
         
         This is a strict new line checker. It will also detect if there is a comment
@@ -214,16 +220,22 @@ class Parser_Function():
         """
         
         # print(self.get_lexemes(["m_comment"], error=False))
-        if self.__get_data("^ *OBTW", "comment"):
-            s.Multiline_Comment(self.tab, self).main()
+        if self.__get_data("^[ \t]*OBTW", "comment", match=match):
+            if match:
+                return True
+            else:
+                s.Multiline_Comment(self.tab, self).main()
+                return True
+        
+        if self.__get_data("^[ \t]*, ?", "soft newline", match=match):
             return True
         
-        if self.__get_data("^, ?", "soft newline"):
-            return True
-        
-        if self.__get_data("^[ \t]*BTW .*", "comment") or self.__get_data("^[ \t]*\n", "newline"):
-            self.tab.new_line()
-            return True
+        if self.__get_data("^[ \t]*BTW .*", "comment", match=match) or self.__get_data("^[ \t]*\n", "newline", match=match):
+            if match:
+                return True
+            else:
+                self.tab.new_line()
+                return True
         
         if error:
             self.syntax_error("There should be a new line here")

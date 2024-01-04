@@ -26,7 +26,7 @@ class Tables_Values:
             this is the line we get the lexemes
         """
 
-        self.variables = {'IT': False}
+        self.variables = {'IT': None}
         """
         variables = {
             "var1": value

@@ -9,28 +9,41 @@ class Output():
     def main(self):
         self.__concat("^\+ ")
         self.tab.terminal += self.concat
-        print("terminal:", self.tab.terminal)
 
     def concatination(self):
-        self.__concat()
-        self.tab.variables["IT"] = self.concat
+        con = self.__concat()
+        self.tab.variables["IT"] = con
+        return con
 
     def __concat(self, delimiter= "^AN "):
 
         # <output> ::= VISIBLE <literal> <concat>
         # <concat> ::= <linebreak> | + <literal> <concat> 
         self.concat = ""
-        self.concat += str(self.pars.get_lexemes(["boolean", "concatination", "infinite", "expression", "comparison", "literal"]))
-        print("concat:", str(self.concat))
-
         while True:
-            if self.pars.get_rid("^! ?","delimeter"):
+            self.concat += str(self.pars.get_lexemes(["boolean","concatination", "infinite","expression", "comparison", "literal"]))
+
+            if self.pars.get_rid("^! ?","delimeter"): # if there is newline supression 
                 self.pars.get_rid_new_line()
                 break
-            if self.pars.get_rid_new_line(error = False):
-                self.concat+= "\n"
+            if (self.pars.get_rid_new_line(error= False, match=True) or
+                (self.pars.get_rid("^\+ ","delimiter", match=True) and delimiter == "^AN ")): # if there is new line
+                if delimiter == "^\+ ":
+                    self.concat+= "\n"
                 break
+
+            # if there still given 
+            self.pars.get_rid(delimiter,"delimeter", f"there should be a '{delimiter}' delimiter")
+
+        return self.concat
+    
+
+
+
+
+            
         
-            self.pars.get_rid(delimiter, "delimiter", f"There should be {delimiter} to concatinate")
-            self.concat += str(self.pars.get_lexemes(["boolean", "concatination",  "infinite", "expression", "comparison",  "literal"]))
+
+
+
  
