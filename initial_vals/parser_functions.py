@@ -266,6 +266,9 @@ class Parser_Function():
             self.get_rid_multiple_lines()
             self.get_rid_spacing()
 
+            if not skip and self.return_checker() :
+                return
+
             if self.get_rid(delimiter, "delimeter"):
                 return
 
@@ -273,6 +276,25 @@ class Parser_Function():
                 self.get_lexemes(["skip"], error=False) or self.tab.new_line()
             else:
                 self.get_lexemes(["boolean","infinite", "expression", "statement"])
+
+    def return_checker (self):
+
+        # special case for switch
+        if self.get_rid("^(GTFO)", "return", match=True) and self.tab.stack[-1] == "switch":
+            return False
+
+        # returning if
+        if self.get_rid("^(FOUND YR |GTFO|IF U SAY SO)", "return", match=True):
+
+            if "func" not in self.tab.stack:
+                self.tab.semantic_error("You cannot return if there is no function")
+            
+            # if it is not the function yet in the stack
+            if self.tab.stack[-1] != "func":
+                return True
+    
+        return False
+
 
     def syntax_error (self, error_description = None):
 

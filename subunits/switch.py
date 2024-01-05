@@ -24,6 +24,8 @@ class Switch():
         has_run = False
         checkCont = False
         captured_delm = "OMG"
+        self.tab.stack.append("switch")
+
         
         while True:
             if ((self.tab.variables["IT"] == self.literal1 and not has_run) or
@@ -35,6 +37,7 @@ class Switch():
                 
             captured_delm = self.tab.capture_group[0] # capture delimiter
             if captured_delm == "OIC":
+                self.tab.stack.pop()
                 self.pars.get_rid_new_line()
                 self.pars.get_rid_multiple_lines()
                 break

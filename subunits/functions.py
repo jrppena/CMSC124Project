@@ -43,7 +43,8 @@ class Functions():
 
         print(self.tab.variables)
         has_return = False          # checker ng return
-
+        
+        self.tab.stack.append("func")
         # 'GTFO ?' baka hindi pumasok sa 'GTFO' condition mo sa baba
         self.pars.run_lines("^(FOUND YR |GTFO|IF U SAY SO)") # run until return or delimiter
         capture = self.tab.capture_group[0] # get results
@@ -61,7 +62,8 @@ class Functions():
             saved_return = None
         
         self.tab.go_line(cur_row+1)
-        # print(cur_row)
+        self.tab.stack.pop()
+        #print(cur_row)
         self.tab.variables = saved_var
         self.tab.variables["IT"] = saved_return
         
