@@ -9,18 +9,18 @@ class Loops():
     def main(self):
 
         # walang carat regex
-        self.pars.get_rid("([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
+        self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
         label = self.tab.capture_group[0]
 
-        self.pars.get_rid("(UPPIN|NERFIN) ?", "label", "there should be a valid label")
+        self.pars.get_rid("^(UPPIN|NERFIN) ?", "label", "there should be a valid label")
         operation = self.tab.capture_group[0]
 
-        self.pars.get_rid("YR ?", "delimeter", "there should be a YR delimeter")
-        self.pars.get_rid("([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
+        self.pars.get_rid("^YR ?", "delimeter", "there should be a YR delimeter")
+        self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
         var_name = self.tab.capture_group[0]
         value = s.Variable(self.tab, self.pars).get_var()        
 
-        self.pars.get_rid("(TIL|WILE) ?", "condition")
+        self.pars.get_rid("^(TIL|WILE) ?", "condition")
         loop_cond = self.tab.capture_group[0]
         saved_row = self.tab.row # isasave yung row na babalikan
 
@@ -36,7 +36,7 @@ class Loops():
         
             # if tama yung condition
             self.pars.run_lines("^IM OUTTA YR ")
-            self.pars.get_rid("([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
+            self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
 
             if self.tab.capture_group[0]!= label:
                 self.tab.semantic_error(f"{self.tab.capture_group[0]} is not the same with defined label {label}")
@@ -49,11 +49,11 @@ class Loops():
             elif operation == "NERFIN":
                 self.tab.variables[var_name] -= 1
         
-        self.pars.get_rid("([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
+        self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
         self.pars.get_rid_new_line()
 
 
     def skip(self):
         self.pars.run_lines("^IM OUTTA YR ", skip=True)
-        self.pars.get_rid("([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
+        self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
 
