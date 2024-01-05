@@ -51,7 +51,7 @@ class Functions():
 
         # if there is a return
         if capture == "FOUND YR ":
-            saved_return = self.pars.get_lexemes(["expression","boolean","infinite", "concatination", "literal"])
+            saved_return = self.pars.get_lexemes(["expression","boolean","infinite", "concatination", "comparison","literal"])
             has_return = True
             self.pars.run_lines("IF U SAY SO", skip = True)
         elif capture == "GTFO":
@@ -86,7 +86,7 @@ class Functions():
                 var = self.tab.capture_group[0]
                 variable.append(var)
             else:
-                variable.append(self.pars.get_lexemes(["expression","boolean","infinite", "concatination", "literal"]))
+                variable.append(self.pars.get_lexemes(["expression","boolean","infinite", "concatination", "comparison", "literal"]))
        
             delimiter = "^AN YR "
 
