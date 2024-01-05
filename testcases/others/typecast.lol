@@ -1,7 +1,15 @@
 HAI
 
-    HOW IZ I func1 YR var1 AN YR var2 AN YR var3 
-        BTW function body
+    HOW IZ I func1 YR var1 AN YR var2
+
+        BOTH SAEM var1 AN 4
+        O RLY?
+            YA RLY
+                GTFO
+        OIC
+
+
+        VISIBLE "hello po"
     IF U SAY SO
 
     HOW IZ I func2 YR var1 AN YR var2 AN YR var3 
@@ -21,7 +29,7 @@ HAI
         I HAS A temp ITZ 2
     BUHBYE
 
-    I IZ func2 YR var1 AN YR var2 AN YR temp MKAY
+    I IZ func1 YR var1 AN YR var2 MKAY
     VISIBLE IT
 
 KTHXBYE
