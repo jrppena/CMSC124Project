@@ -20,6 +20,8 @@ class IfElse():
         self.pars.get_rid_multiple_lines()
         
         delimiter = "^(NO WAI|MEBBE|OIC) ?"
+
+        self.tab.stack.append("ifelse")
         has_run = False
         captured_delm = "YA RLY"
         while True:
@@ -29,10 +31,15 @@ class IfElse():
             else: # skip
                 self.pars.run_lines(delimiter, skip=True)
 
+            if self.pars.return_checker():
+                self.tab.stack.pop()
+                return
+            
             captured_delm = self.tab.capture_group[0] # capture delimiter
             
             if captured_delm == "OIC": 
                 self.pars.get_rid_new_line()
+                self.tab.stack.pop()
                 self.pars.get_rid_multiple_lines()
                 break 
             elif captured_delm == "NO WAI":

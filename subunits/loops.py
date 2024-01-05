@@ -23,6 +23,7 @@ class Loops():
         self.pars.get_rid("^(TIL|WILE) ?", "condition")
         loop_cond = self.tab.capture_group[0]
         saved_row = self.tab.row # isasave yung row na babalikan
+        self.tab.stack.append("loop")
 
         while True:
             value = self.pars.get_lexemes(["comparison"])
@@ -48,8 +49,9 @@ class Loops():
                 self.tab.variables[var_name] += 1
             elif operation == "NERFIN":
                 self.tab.variables[var_name] -= 1
-        
-        self.pars.get_rid("^([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
+
+        self.tab.stack.pop()
+        self.pars.get_rid("([a-zA-Z][a-zA-Z0-9_]*) ?", "label", "there should be a valid label")
         self.pars.get_rid_new_line()
 
 
