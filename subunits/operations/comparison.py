@@ -38,22 +38,24 @@ class Comparison():
         """
 
         checker1 = self.tab.capture_group[0]
-        self.literal1 = self.pars.get_lexemes(["expression", "number"])
+        self.literal1 = self.pars.get_lexemes(["expression", "compnumber"])
         self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
 
         # Checks if the next lexeme has a "BIGGR OF" or "SMALLR OF" keyword
         if self.pars.get_rid("^(BIGGR OF|SMALLR OF) ", "delimiter"):
             checker2 = self.tab.capture_group[0]
-            self.literal2 = self.pars.get_lexemes(["expression", "number"])
+            self.literal2 = self.pars.get_lexemes(["expression", "compnumber"])
             if self.literal1 != self.literal2:
                 self.tab.semantic_error(f"The two values {self.literal1} and {self.literal2} should be the same")
             self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
-            self.literal3 = self.pars.get_lexemes(["expression", "number"]) 
+            self.literal3 = self.pars.get_lexemes(["expression", "compnumber"])
+            self.checkType2(self.literal2, self.literal3)
             self.checkRelOp(checker1, checker2)
             self.tab.variables["IT"] = self.result
             return self.result 
             
-        self.literal2 = self.pars.get_lexemes(["expression", "number"])
+        self.literal2 = self.pars.get_lexemes(["expression", "compnumber"])
+        self.checkType1(self.literal1, self.literal2) # Checks type of the two literals
         if checker1 == "BOTH SAEM":
             self.result = self.literal1 == self.literal2
         elif checker1 == "DIFFRINT":
@@ -78,3 +80,11 @@ class Comparison():
             self.result = self.literal2 < self.literal3
         elif checker1 == "DIFFRINT" and checker2 == "SMALLR OF":
             self.result = self.literal2 > self.literal3
+
+    def checkType1(self, literal1, literal2):
+        if type(literal1).__qualname__ != type(literal2).__qualname__:
+            self.result = False
+    
+    def checkType2(self, literal2, literal3):
+        if type(literal2).__qualname__ != type(literal3).__qualname__:
+            self.result = False
