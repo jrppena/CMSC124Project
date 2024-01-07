@@ -49,17 +49,17 @@ class Comparison():
                 self.tab.semantic_error(f"The two values {self.literal1} and {self.literal2} should be the same")
             self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
             self.literal3 = self.pars.get_lexemes(["expression", "compnumber"])
-            self.checkType2(self.literal2, self.literal3)
             self.checkRelOp(checker1, checker2)
+            self.checkType2(self.literal2, self.literal3)
             self.tab.variables["IT"] = self.result
             return self.result 
             
         self.literal2 = self.pars.get_lexemes(["expression", "compnumber"])
-        self.checkType1(self.literal1, self.literal2) # Checks type of the two literals
         if checker1 == "BOTH SAEM":
             self.result = self.literal1 == self.literal2
         elif checker1 == "DIFFRINT":
             self.result = self.literal1 != self.literal2
+        self.checkType1(self.literal1, self.literal2) # Checks type of the two literals
         self.tab.variables["IT"] = self.result 
         return self.result 
 
