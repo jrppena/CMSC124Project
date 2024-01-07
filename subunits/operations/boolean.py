@@ -73,7 +73,8 @@ class Boolean_Temp():
         self.result = bool(self.literal1 and self.literal2)
 
         while True:
-            if self.pars.get_rid("^MKAY ?", "delimiter"):
+            if not self.pars.get_rid("^AN ", "delimiter", match=True):
+                self.pars.get_rid("^MKAY ?", "delimiter", "There should be an 'MKAY' delimiter")
                 break
             self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
             self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
@@ -93,7 +94,8 @@ class Boolean_Temp():
         self.result = bool(self.literal1 or self.literal2)
 
         while True:
-            if self.pars.get_rid("^MKAY ?", "delimiter"):
+            if not self.pars.get_rid("^AN ", "delimiter", match=True):
+                self.pars.get_rid("^MKAY ?", "delimiter", "There should be an 'MKAY' delimiter")
                 break
             self.pars.get_rid("^AN ", "delimiter", "There should be 'AN' delimiter")
             self.literal1 = self.pars.get_lexemes(["boolean", "literal"])
