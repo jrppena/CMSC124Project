@@ -75,6 +75,13 @@ class Parser_Function():
             "comparison": {
                 "^(BOTH SAEM|DIFFRINT) ": s.Comparison(self.tab, self).main,
             },
+            "compnumber": {
+                "^-?[0-9]+\.[0-9]+ ?": s.Data_Type(self.tab).numbar,
+                "^-?[0-9]+ ?": s.Data_Type(self.tab).numbr,
+                "^\"([-+\w\s.\[\]:()<>,\*!'?=/%]*)\" ?": s.Data_Type(self.tab).yarn,
+                "^(WIN|FAIL) ?": s.Data_Type(self.tab).troof,
+                "^([a-zA-Z][a-zA-Z0-9_]*) ?": s.Variable(self.tab, self).num_var,
+            },
             "concatination":{
                  "^SMOOSH ": s.Output(self.tab, self).concatination,
             },
